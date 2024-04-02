@@ -11,7 +11,7 @@ Stack:
 - [NextAuth.js](https://next-auth.js.org)
 - [Prisma](https://prisma.io)
 - [Tailwind CSS](https://tailwindcss.com)
-- shadcn-ui
+- [shadcn-ui](https://ui.shadcn.com/)
+- [React Email](https://react.email/)
 - Stripe SDK
 - Resend SDK
-- React Email
