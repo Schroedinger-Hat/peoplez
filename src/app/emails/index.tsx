@@ -4,7 +4,7 @@ import * as React from "react";
 const baseUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
     : "";
-
+console.log(process.env)
 export default function Email() {
     return (
         <>
@@ -17,7 +17,7 @@ export default function Email() {
                             src={`${baseUrl}/static/org-logo.png`}
                             width={48}
                             height={48}
-                            alt={process.env.MARKETING_NAME}
+                            alt={process.env.MARKETING_EMAIL_NAME}
                         />
                         <Heading style={heading}>🪄 Your magic link</Heading>
                         <Section style={body}>
