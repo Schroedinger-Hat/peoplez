@@ -1,6 +1,6 @@
 # Peoplez
 
-Peoples is an open-source, self-hosted organisation management software that allows you to manage basic needs of your nonprofit organisation
+Peoplez is an open-source, self-hosted organisation management software that allows you to manage basic needs of your nonprofit organisation
 
 ## Tech
 Next.js Typescript app, created with T3 
