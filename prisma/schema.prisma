@@ -25,7 +25,6 @@ model Configurable {
 
     @@index([name])
 }
-
 enum ConfigurableType {
   STRING
   TEXT
