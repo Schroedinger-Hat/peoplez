@@ -15,3 +15,13 @@ Stack:
 - [React Email](https://react.email/)
 - Stripe SDK
 - Resend SDK
+
+## Setup
+
+Make sure that your .env file is complete, run
+
+        nvm install
+        npm install    
+        ./start-database
+        npm run db:push
+        npm run dev
