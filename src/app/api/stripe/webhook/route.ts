@@ -30,12 +30,6 @@ export async function POST(req: NextApiRequest) {
     case 'customer.subscription.updated':
       console.log(`🔄 Subscription updated.`);
       break;
-    case 'customer.subscription.paused':
-      console.log(`⏸ Subscription paused.`);
-      break;
-    case 'customer.subscription.resumed':
-      console.log(`▶️ Subscription resumed.`);
-      break;
     default:
       console.log(`❌ Unhandled event type: ${event.type}`);
   }
