@@ -32,6 +32,7 @@
     "react-dom": "18.2.0",
     "react-email": "2.1.1",
     "react-hook-form": "^7.51.2",
+    "stripe": "14.23.0",
     "tailwind-merge": "^2.2.2",
     "zod": "^3.22.4",
     "zustand": "^4.5.2"
