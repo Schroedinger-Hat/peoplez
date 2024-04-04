@@ -59,6 +59,7 @@ export default function SignupPage() {
                 By clicking continue, you agree to our{" "}
                 <Link
                     href="/legal/terms-of-service"
+                    target={'_blank'}
                     className="underline underline-offset-4 hover:text-primary"
                 >
                     Terms of Service
@@ -66,6 +67,7 @@ export default function SignupPage() {
                 and{" "}
                 <Link
                     href="/legal/privacy-policy"
+                    target={'_blank'}
                     className="underline underline-offset-4 hover:text-primary"
                 >
                     Privacy Policy

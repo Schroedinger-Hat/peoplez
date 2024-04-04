@@ -101,7 +101,7 @@ export function StepForm({form}) {
                                             </FormControl>
                                             <div className={'ml-2'}>
                                                 <p className={'text-sm font-semibold'}>Statute</p>
-                                                <p className={'text-sm'}>I've read and approved <Link target="_blank" href={'/legal/statute'}>the statute</Link></p>
+                                                <p className={'text-sm'}>I've read and approved <Link target="_blank" className={'underline'} href={'/legal/statute'}>the statute</Link></p>
                                                 <FormMessage/>
                                             </div>
                                         </div>
