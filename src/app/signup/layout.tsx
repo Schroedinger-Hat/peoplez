@@ -3,7 +3,7 @@ import {buttonVariants} from "@/components/ui/button";
 import Link from "next/link";
 import {cn} from "@/lib/utils";
 
-import logo from '@/app/images/logo.svg'
+import logo from '@/images/logo.svg'
 
 export default function SignUpLayout({
                                          children,
