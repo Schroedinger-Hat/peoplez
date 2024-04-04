@@ -52,9 +52,9 @@ export function StepForm({form}) {
                             name="email"
                             render={({field}) => (
                                 <FormItem>
-                                    <FormLabel>Name</FormLabel>
+                                    <FormLabel>Email</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="john@doe.com" {...field} />
+                                        <Input placeholder="john@doe.com" type={'email'} {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
