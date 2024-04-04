@@ -1,86 +1,79 @@
 'use client'
 
 import Link from "next/link"
-import {Button} from "@/components/ui/button"
-import {Input} from "@/components/ui/input"
-import {Label} from "@/components/ui/label"
-import {useState} from "react";
+import {useForm} from "react-hook-form";
+import {z} from "zod";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {StepForm} from "@/app/signup/stepForm";
+import {DebugDisplay} from "@/components/debug/display";
+
+const formSchema = z.object({
+    name: z
+        .string()
+        .min(2, {
+            message: "Name must be at least 2 characters.",
+        }),
+    surname: z
+        .string()
+        .min(2, {
+            message: "Surname must be at least 2 characters.",
+        }),
+    email: z
+        .string()
+        .email(),
+    socialSecurityCode: z
+        .string()
+        .regex(new RegExp(/^[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9]{3}[A-Za-z]{1}$/), 'Invalid format, only italians "codice fiscale" are accepted'),
+    approvedStatute: z
+        .boolean()
+        .refine(val => val, {
+            message: "Please read and accept the statute",
+        })
+})
 
 export default function SignupPage() {
-    const [step, setStep] = useState()
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            name: "",
+            surname: "",
+            email: "",
+            socialSecurityCode: "",
+        },
+    })
 
     return (
-        <>
-            <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-                <div className="flex flex-col space-y-2 text-center">
-                    <h1 className="text-2xl font-semibold tracking-tight">
-                        Activate a Membership
-                    </h1>
-                    <p className="text-sm text-muted-foreground">
-                        Fill the form below to request a membership number for the association: <b>Schroedinger Hat</b>
-                    </p>
-                </div>
-
-                <div className="grid grid-cols-2 gap-2">
-                    <div>
-                        <Label htmlFor="email">Name</Label>
-                        <Input
-                            id="email"
-                            type="email"
-                            placeholder="John"
-                            required
-                        />
-                    </div>
-                    <div>
-                        <Label htmlFor="email">Surname</Label>
-                        <Input
-                            id="email"
-                            type="email"
-                            placeholder="Doe"
-                            required
-                        />
-                    </div>
-                </div>
-                <div className="grid gap-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                        id="email"
-                        type="email"
-                        placeholder="john.d@example.com"
-                        required
-                    />
-                </div>
-                <div className="grid gap-2">
-                    <Label htmlFor="email">Social Security Code</Label>
-                    <Input
-                        id="email"
-                        type="email"
-                        placeholder="LBRMTT..."
-                        required
-                    />
-                </div>
-                <div className={'float-right'}>
-                    <Button>Next</Button>
-                </div>
-
-                <p className="px-8 text-center text-sm text-muted-foreground">
-                    By clicking continue, you agree to our{" "}
-                    <Link
-                        href="/legal-terms-of-service"
-                        className="underline underline-offset-4 hover:text-primary"
-                    >
-                        Terms of Service
-                    </Link>{" "}
-                    and{" "}
-                    <Link
-                        href="/legal/privacy-policy"
-                        className="underline underline-offset-4 hover:text-primary"
-                    >
-                        Privacy Policy
-                    </Link>
-                    .
+        <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+            <div className="flex flex-col space-y-2 text-center">
+                <h1 className="text-2xl font-semibold tracking-tight">
+                    Activate a Membership
+                </h1>
+                <p className="text-sm text-muted-foreground">
+                    Fill the form below to request a membership number for the association: <b>Schroedinger Hat</b>
                 </p>
             </div>
-        </>
+
+            <StepForm form={form}/>
+
+            <p className="px-8 text-center text-sm text-muted-foreground">
+                By clicking continue, you agree to our{" "}
+                <Link
+                    href="/legal/terms-of-service"
+                    target={'_blank'}
+                    className="underline underline-offset-4 hover:text-primary"
+                >
+                    Terms of Service
+                </Link>{" "}
+                and{" "}
+                <Link
+                    href="/legal/privacy-policy"
+                    target={'_blank'}
+                    className="underline underline-offset-4 hover:text-primary"
+                >
+                    Privacy Policy
+                </Link>
+                .
+            </p>
+        </div>
     )
 }
