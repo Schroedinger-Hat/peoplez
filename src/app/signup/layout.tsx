@@ -2,8 +2,7 @@ import Image from "next/image"
 import {buttonVariants} from "@/components/ui/button";
 import Link from "next/link";
 import {cn} from "@/lib/utils";
-
-import logo from '@/images/logo.svg'
+import logoWhite from '@/images/logo-white.svg'
 
 export default function SignUpLayout({
                                          children,
@@ -41,7 +40,7 @@ export default function SignUpLayout({
                 <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
                     <div className="absolute inset-0 bg-zinc-900" />
                     <div className="relative z-20 flex items-center text-lg font-medium">
-                       <Image src={logo} alt={'logo'} width={42} className={'mr-3'}/>
+                       <Image src={logoWhite} alt={'logo'} width={42} className={'mr-3'}/>
                         {process.env.MARKETING_NAME}
                     </div>
                     <div className="relative z-20 mt-auto">

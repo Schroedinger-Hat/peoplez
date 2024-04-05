@@ -1,6 +1,6 @@
 import {Inter} from "next/font/google";
 import Image from "next/image";
-import logo from "@/images/logo.svg";
+import logo from "@/images/logo-white.svg";
 import Link from "next/link";
 
 export default function LegalLayout({children}: { children: React.ReactNode }) {
