@@ -1,9 +1,8 @@
-import {DiscordSignIn} from "@/components/login/admin/components/discordSignIn";
+import {DiscordSignIn} from "@/app/admin/@unauthenticated/components/discordSignIn";
 import {Card, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 
-export function AdminLogin() {
+export default function AdminLogin() {
     return (
-        <main className="h-screen flex justify-center items-center bg-zinc-900">
             <Card className="max-w-sm">
                 <CardHeader>
                     <CardTitle className="text-2xl">Login</CardTitle>
@@ -15,6 +14,5 @@ export function AdminLogin() {
                     <DiscordSignIn/>
                 </CardFooter>
             </Card>
-        </main>
     )
 }
