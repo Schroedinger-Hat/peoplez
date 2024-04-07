@@ -13,26 +13,23 @@ import {
 import {LogoutButton} from "@/app/admin/@authenticated/components/logout";
 import logo from "@/images/logo.svg";
 import Image from "next/image";
+import {adminMenuTreeConfig} from "@/app/admin/const";
 
 function usernameToInitials(username: string) {
     return username.split(' ').filter(Boolean).slice(0, 2).map((word: string) => word[0]).join('').toUpperCase()
 }
 
-const mainMenu = [
-    {url: '/memberships', label: 'Memberships'},
-    {url: '/users', label: 'Users'},
-    {url: '/settings', label: 'Settings'},
-]
+interface LayoutInterface {
+    children: React.ReactNode;
+    authenticated: React.ReactNode;
+    unauthenticated: React.ReactNode;
+}
 
 export default async function Layout({
                                          children,
                                          authenticated,
                                          unauthenticated,
-                                     }: {
-    children: React.ReactNode;
-    authenticated: React.ReactNode;
-    unauthenticated: React.ReactNode;
-}) {
+                                     }: LayoutInterface) {
     const session = await getServerAuthSession()
     const isLoggedIn = session !== null
 
@@ -42,10 +39,12 @@ export default async function Layout({
                 {/*Navigation*/}
                 <header
                     className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 justify-between">
-                    <div className={'flex gap-1 items-center'}>
-                        <Image src={logo} alt={'logo'} width={36} className={'mr-3'}/>
-                        <span className="test-sm font-semibold">Schroedinger Hat</span>
-                    </div>
+                    <Link href='/admin'>
+                        <div className={'flex gap-1 items-center'}>
+                            <Image src={logo} alt={'logo'} width={36} className={'mr-3'}/>
+                            <span className="test-sm font-semibold">Schroedinger Hat</span>
+                        </div>
+                    </Link>
                     <nav
                         className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
                         <Link
@@ -55,7 +54,7 @@ export default async function Layout({
 
                         </Link>
                         {
-                            mainMenu.map(mainMenuItem => (
+                            adminMenuTreeConfig.map(mainMenuItem => (
                                 <Link href={mainMenuItem.url}
                                       className="text-muted-foreground transition-colors hover:text-foreground">
                                     {mainMenuItem.label}
@@ -76,14 +75,14 @@ export default async function Layout({
                         <SheetContent side="left">
                             <nav className="grid gap-6 text-lg font-medium">
                                 <Link
-                                    href="#"
+                                    href="/admin"
                                     className="flex items-center gap-2 text-lg font-semibold"
                                 >
                                     <Image src={logo} alt={'logo'} width={42} className={'mr-3'}/>
                                     <span className="sr-only">Schroedinger Hat</span>
                                 </Link>
                                 {
-                                    mainMenu.map(mainMenuItem => (
+                                    adminMenuTreeConfig.map(mainMenuItem => (
                                         <Link href={mainMenuItem.url}
                                               className="text-muted-foreground hover:text-foreground">
                                             {mainMenuItem.label}

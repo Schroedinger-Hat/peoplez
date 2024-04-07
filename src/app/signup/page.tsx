@@ -5,7 +5,7 @@ import {useForm} from "react-hook-form";
 import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {StepForm} from "@/app/signup/stepForm";
-import {DebugDisplay} from "@/components/debug/display";
+import {DebugDisplay} from "@/components/devtool/display";
 
 const formSchema = z.object({
     name: z
