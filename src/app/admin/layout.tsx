@@ -13,26 +13,23 @@ import {
 import {LogoutButton} from "@/app/admin/@authenticated/components/logout";
 import logo from "@/images/logo.svg";
 import Image from "next/image";
+import {mainMenu} from "@/app/admin/const";
 
 function usernameToInitials(username: string) {
     return username.split(' ').filter(Boolean).slice(0, 2).map((word: string) => word[0]).join('').toUpperCase()
 }
 
-const mainMenu = [
-    {url: '/memberships', label: 'Memberships'},
-    {url: '/users', label: 'Users'},
-    {url: '/settings', label: 'Settings'},
-]
+interface LayoutInterface {
+    children: React.ReactNode;
+    authenticated: React.ReactNode;
+    unauthenticated: React.ReactNode;
+}
 
 export default async function Layout({
                                          children,
                                          authenticated,
                                          unauthenticated,
-                                     }: {
-    children: React.ReactNode;
-    authenticated: React.ReactNode;
-    unauthenticated: React.ReactNode;
-}) {
+                                     }: LayoutInterface) {
     const session = await getServerAuthSession()
     const isLoggedIn = session !== null
 
