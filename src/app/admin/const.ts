@@ -1,8 +1,8 @@
-export const mainMenu = [
+export const adminMenuTreeConfig = [
     {
-        url: '/admin/memberships',
-        label: 'Memberships',
-        id: 'memberships'
+        url: '/admin/membership',
+        label: 'Membership',
+        id: 'membership'
     },
     {
         url: '/admin/users',
@@ -12,6 +12,28 @@ export const mainMenu = [
     {
         url: '/admin/settings',
         label: 'Settings',
-        id: 'settings'
+        id: 'settings',
+        children:[
+            {
+                url: '/admin/settings',
+                label: 'General',
+                id: 'general',
+            },
+            {
+                url: '/admin/settings/branding',
+                label: 'Branding',
+                id: 'branding',
+            },
+            {
+                url: '/admin/settings/statute',
+                label: 'Statute & Legal',
+                id: 'statute',
+            },
+            {
+                url: '/admin/settings/advanced',
+                label: 'Advanced',
+                id: 'advanced',
+            }
+        ]
     },
 ]
