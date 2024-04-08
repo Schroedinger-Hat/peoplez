@@ -41,7 +41,7 @@ export function MembershipCard({title, features, description, price}: Membership
                 </span>
             </div>
             {
-                features.length && <ul className={'list-disc pl-3'}>{features.map(feature => <li className={'text-sm text-gray-800'}>{feature}</li>)}</ul>
+                features.length && <ul className={'list-disc pl-3'}>{features.map((feature,index) => <li key={index} className={'text-sm text-gray-800'}>{feature}</li>)}</ul>
             }
             {
                 description && <p className={'mt-4 font-light text-sm italic'}>{description}</p>
