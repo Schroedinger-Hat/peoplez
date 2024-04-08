@@ -22,8 +22,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { sendMagicLink } from "@/app/actions/sendMagicLink";
-import { DebugDisplay } from "@/components/debug/display";
 import { signIn, useSession } from "next-auth/react";
+import {Debug} from "@/components/devtool/debug";
 
 export default function HomePage() {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -73,8 +73,8 @@ export function LoginForm({ form, state }) {
 
   return (
     <Form {...form}>
-      <DebugDisplay title={"formStatus"}>{formStatus}</DebugDisplay>
-      <DebugDisplay title={"state"}>{state}</DebugDisplay>
+      <Debug title={"formStatus"}>{formStatus}</Debug>
+      <Debug title={"state"}>{state}</Debug>
       <Card className="max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
