@@ -1,6 +1,7 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import { getSession } from "next-auth/react";
 
 const ProductDisplay = () => (
   <section>
@@ -20,7 +21,7 @@ const ProductDisplay = () => (
   </section>
 );
 
-const SuccessDisplay = ({ sessionId }: {sessionId: string}) => {
+const SuccessDisplay = ({ sessionId }: { sessionId: string }) => {
   if (!sessionId) {
     return null;
   }
@@ -48,37 +49,37 @@ const SuccessDisplay = ({ sessionId }: {sessionId: string}) => {
   );
 };
 
-const Message = ({ message }: {message: string}) => (
+const Message = ({ message }: { message: string }) => (
   <section>
     <p>{message}</p>
   </section>
 );
 
 export default function Me() {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
-  const [sessionId, setSessionId] = useState('');
+  const [sessionId, setSessionId] = useState("");
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
 
-    if (query.get('success')) {
+    if (query.get("success")) {
       setSuccess(true);
-      setSessionId(query.get('session_id') ?? '');
+      setSessionId(query.get("session_id") ?? "");
     }
 
-    if (query.get('canceled')) {
+    if (query.get("canceled")) {
       setSuccess(false);
       setMessage(
-        "Order canceled -- continue to shop around and checkout when you're ready."
+        "Order canceled -- continue to shop around and checkout when you're ready.",
       );
     }
   }, [sessionId]);
 
-  if (!success && message === '') {
+  if (!success && message === "") {
     return <ProductDisplay />;
-  } else if (success && sessionId !== '') {
+  } else if (success && sessionId !== "") {
     return <SuccessDisplay sessionId={sessionId} />;
   } else {
     return <Message message={message} />;
