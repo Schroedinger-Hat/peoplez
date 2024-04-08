@@ -6,6 +6,8 @@ import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {Checkbox} from "@/components/ui/checkbox";
 import Link from "next/link";
+import {PaymentElement} from "@stripe/react-stripe-js";
+import {MembershipCard, PricePeriod, PriceUnit} from "@/app/signup/components/membershipCard";
 
 // @ts-ignore
 export function StepForm({form}) {
@@ -13,6 +15,7 @@ export function StepForm({form}) {
 
     return (
         <Form {...form}>
+            {/*Account data*/}
             {
                 step === 1 && <div className="grid grid-cols-2 gap-2">
                     <div>
@@ -70,6 +73,8 @@ export function StepForm({form}) {
                     </div>
                 </div>
             }
+
+            {/*Organisation required data*/}
             {
                 step === 2 && <div className="grid grid-cols-2 gap-2 animate-in slide-in-from-right-12 duration-300">
                     <div className={'col-span-2'}>
@@ -92,16 +97,22 @@ export function StepForm({form}) {
                         <div className={'p-3 border-blue-200 border-2 rounded-2xl'}>
                             <FormField
                                 control={form.control}
-                                name="approvedStatute"
+                                name="statuteApproval"
                                 render={({field}) => (
                                     <FormItem>
                                         <div className={'flex'}>
                                             <FormControl>
-                                                <Checkbox/>
+                                                <Checkbox
+                                                    checked={field.value}
+                                                    onCheckedChange={field.onChange}
+                                                />
                                             </FormControl>
                                             <div className={'ml-2'}>
                                                 <p className={'text-sm font-semibold'}>Statute</p>
-                                                <p className={'text-sm'}>I've read and approved <Link target="_blank" className={'underline'} href={'/legal/statute'}>the statute</Link></p>
+                                                <p className={'text-sm'}>I've read and approved <Link target="_blank"
+                                                                                                      className={'underline'}
+                                                                                                      href={'/documents/legal/statute'}>the
+                                                    statute</Link></p>
                                                 <FormMessage/>
                                             </div>
                                         </div>
@@ -114,18 +125,45 @@ export function StepForm({form}) {
                     <div className={'col-span-2 pt-3'}>
                         <div className={'flex-row-reverse flex'}>
                             <Button
-                                onClick={async () => await form.trigger(['socialSecurityCode', 'approvedStatute']) && setStep(3)}>Next</Button>
+                                onClick={async () => await form.trigger(['socialSecurityCode', 'statuteApproval']) && setStep(3)}>Next</Button>
                         </div>
                     </div>
                 </div>
             }
+
+            {/*Membership level*/}
             {
-                step === 3 && <div className="grid grid-cols-1 gap-2 animate-in slide-in-from-right-12 duration-300">
-                    <p className={'text-sm'}>
-                        We're going to redirect you to our PaymentProvider stripe to setup the last details of your
-                        subscription.
-                        Click Next to be redirected
-                    </p>
+                step === 3 && <div className="grid grid-cols-1 animate-in slide-in-from-right-12 duration-300">
+
+                    <div className="flex flex-col">
+                        <MembershipCard
+                            title={'SH 2024 Membership'}
+                            features={[
+                                'Be part of the community',
+                                'Early-access to event tickets and contents',
+                                'Dedicated 5€ discount on all shop orders',
+                                'Exclusive members meetups and dinners'
+                            ]}
+                            price={{value: 2400, unit: PriceUnit.Eur, period: PricePeriod.Yearly}}
+                            description={'Support groundbreaking open source initiatives and join us in our mission to create an international community of open source lovers.'}
+                        />
+                    </div>
+
+                    <div className={'col-span-2 mt-8'}>
+                        <p className={'text-xs text-gray-600 text-center mb-4'}>By clicking 'Subscribe' you will proceed to payment.<br/>Payment is processed through our partner Stripe</p>
+                        <div className={'flex-row-reverse flex'}>
+                            <Button>Subscribe</Button>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            {/*Payment*/}
+            {
+                step === 4 && <div className="grid grid-cols-1 gap-2 animate-in slide-in-from-right-12 duration-300">
+                    {/*Payment Layout*/}
+                    <PaymentElement/>
+
                     <div className={'col-span-2 pt-3'}>
                         <div className={'flex-row-reverse flex'}>
                             <Button>Next</Button>
