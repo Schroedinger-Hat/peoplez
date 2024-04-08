@@ -1,13 +1,23 @@
 "use server";
 
+import { db } from "@/server/db";
+
 export async function sendMagicLink(prevState: any, formData: FormData) {
-    // simulate some kind of data processing like persisting data
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+  const user = await db.user.findFirst({
+    where: {
+      email: formData.email,
+    },
+  });
 
-    console.log("server action", formData);
-
+  if (!user) {
     return {
-        status: "success",
-        message: `Welcome, ${formData.email}`,
+      status: "error",
+      message: "User not found",
     };
+  }
+
+  return {
+    status: "success",
+    message: `Welcome, ${formData.email}`,
+  };
 }
