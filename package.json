@@ -13,6 +13,7 @@
     "dev:email-noenv": "email dev --dir src/emails",
     "postinstall": "prisma generate",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "start": "next start"
   },
   "dependencies": {

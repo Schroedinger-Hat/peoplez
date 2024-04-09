@@ -1,4 +1,4 @@
-import {Button, ButtonProps} from "@/components/ui/button";
+import {Button, type ButtonProps} from "@/components/ui/button";
 
 interface StatefulButtonProps extends ButtonProps {
     loading: boolean

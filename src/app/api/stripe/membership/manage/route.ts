@@ -1,7 +1,7 @@
 import { type NextApiRequest, NextApiResponse } from "next";
 import { stripe } from "@/services/stripe";
 import { env } from "@/env";
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   const checkoutSession = await stripe.checkout.sessions.retrieve("xxx");

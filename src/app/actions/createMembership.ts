@@ -73,7 +73,7 @@ export async function createMembership(prevState: any, formData: FormData) {
 
     // Create Stripe subscription
     const stripeSubscription = await stripe.subscriptions.create({
-        customer: user.stripeCustomerId!!,
+        customer: user.stripeCustomerId,
         items: [{
             price: MEMBERSHIP_PRICE_ID
         }],

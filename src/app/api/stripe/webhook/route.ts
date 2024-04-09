@@ -1,7 +1,7 @@
 import { type NextApiRequest, NextApiResponse } from "next";
 import { stripe } from "@/services/stripe";
 import type Stripe from "stripe";
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
 const endpointSecret = "";
 

@@ -27,7 +27,7 @@ const formSchema = z.object({
         .regex(new RegExp(/^[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9]{3}[A-Za-z]{1}$/), 'Invalid format, only italians "codice fiscale" are accepted'),
     statuteApproval: z
         .boolean()
-        .refine(val => val!!, {
+        .refine(val => val, {
             message: "Please read and accept the statute",
         })
 })
