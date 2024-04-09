@@ -1,19 +1,20 @@
 'use client'
 
-import Link from "next/link"
 import {useForm} from "react-hook-form";
 import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {StepForm} from "@/app/signup/stepForm";
-import {DebugDisplay} from "@/components/devtool/display";
+import {useFormState} from "react-dom";
+import {createMembership} from "@/app/actions/createMembership";
+import {loadStripe} from "@stripe/stripe-js";
 
 const formSchema = z.object({
-    name: z
+    firstName: z
         .string()
         .min(2, {
             message: "Name must be at least 2 characters.",
         }),
-    surname: z
+    lastName: z
         .string()
         .min(2, {
             message: "Surname must be at least 2 characters.",
@@ -21,27 +22,17 @@ const formSchema = z.object({
     email: z
         .string()
         .email(),
-    socialSecurityCode: z
+    socialSecurityNumber: z
         .string()
         .regex(new RegExp(/^[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9]{3}[A-Za-z]{1}$/), 'Invalid format, only italians "codice fiscale" are accepted'),
-    approvedStatute: z
+    statuteApproval: z
         .boolean()
-        .refine(val => val, {
+        .refine(val => val!!, {
             message: "Please read and accept the statute",
         })
 })
 
 export default function SignupPage() {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            name: "",
-            surname: "",
-            email: "",
-            socialSecurityCode: "",
-        },
-    })
-
     return (
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
             <div className="flex flex-col space-y-2 text-center">
@@ -53,27 +44,39 @@ export default function SignupPage() {
                 </p>
             </div>
 
-            <StepForm form={form}/>
-
-            <p className="px-8 text-center text-sm text-muted-foreground">
-                By clicking continue, you agree to our{" "}
-                <Link
-                    href="/legal/terms-of-service"
-                    target={'_blank'}
-                    className="underline underline-offset-4 hover:text-primary"
-                >
-                    Terms of Service
-                </Link>{" "}
-                and{" "}
-                <Link
-                    href="/legal/privacy-policy"
-                    target={'_blank'}
-                    className="underline underline-offset-4 hover:text-primary"
-                >
-                    Privacy Policy
-                </Link>
-                .
-            </p>
+            <PageLogic/>
         </div>
+    )
+}
+
+function PageLogic() {
+    const [state, formAction] = useFormState(createMembership, {
+        state: 'incomplete',
+        payload: {}
+    });
+
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            firstName: "Mattia",
+            lastName: "Lobertini",
+            email: "lobetia@gmail.com",
+            socialSecurityNumber: "LBRMTT92E14B157T",
+            statuteApproval: true
+        },
+    })
+
+    const handleForm = async (data: FormData) => {
+        if (state.nextStep === 'confirmPayment') {
+
+        } else {
+            formAction(data)
+        }
+    }
+
+    return (
+        <form action={form.handleSubmit(handleForm)}>
+            <StepForm form={form} state={state}/>
+        </form>
     )
 }

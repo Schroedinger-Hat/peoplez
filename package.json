@@ -29,6 +29,8 @@
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
     "@react-email/components": "0.0.16",
+    "@stripe/react-stripe-js": "^2.6.2",
+    "@stripe/stripe-js": "^3.2.0",
     "@t3-oss/env-nextjs": "^0.9.2",
     "@types/mdx": "^2.0.12",
     "class-variance-authority": "^0.7.0",
