@@ -1,7 +1,7 @@
 "use server";
 
-import {db} from "@/server/db";
-import {stripe} from "@/server/stripe";
+import {db} from "@/services/db";
+import {stripe} from "@/services/stripe";
 import {MembershipStatus} from "@prisma/client";
 
 const MEMBERSHIP_PRICE_ID = 'price_1P3HNlCXdJySzBrwlcoAQqS2'

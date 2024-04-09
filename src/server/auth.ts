@@ -9,7 +9,7 @@ import DiscordProvider from "next-auth/providers/discord";
 import EmailProvider from "next-auth/providers/email";
 
 import { env } from "@/env";
-import { db } from "@/server/db";
+import { db } from "@/services/db";
 import { EmailsProvider } from "react-email/src/contexts/emails";
 
 /**

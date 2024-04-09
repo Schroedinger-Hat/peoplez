@@ -1,5 +1,5 @@
 import {type NextApiRequest, NextApiResponse} from "next";
-import {stripe} from "@/server/stripe";
+import {stripe} from "@/services/stripe";
 import {env} from "@/env";
 import {NextResponse} from "next/server";
 

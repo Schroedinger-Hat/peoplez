@@ -58,10 +58,10 @@ function PageLogic() {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            firstName: "Mattia",
-            lastName: "Lobertini",
-            email: "lobetia@gmail.com",
-            socialSecurityNumber: "LBRMTT92E14B157T",
+            firstName: "",
+            lastName: "",
+            email: "",
+            socialSecurityNumber: "",
             statuteApproval: true
         },
     })
