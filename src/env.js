@@ -34,8 +34,8 @@ export const env = createEnv({
     MARKETING_NAME: z.string(),
     MARKETING_WEBSITE_URL: z.string(),
 
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string(),
     STRIPE_PRIVATE_KEY: z.string(),
-    STRIPE_PRICES_LOOKUP_KEY: z.string(),
 
     EMAIL_SERVER_HOST: z.string(),
     EMAIL_SERVER_PORT: z.number(),
@@ -66,8 +66,8 @@ export const env = createEnv({
     DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
     MARKETING_NAME: process.env.MARKETING_NAME,
     MARKETING_WEBSITE_URL: process.env.MARKETING_WEBSITE_URL,
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
     STRIPE_PRIVATE_KEY: process.env.STRIPE_PRIVATE_KEY,
-    STRIPE_PRICES_LOOKUP_KEY: process.env.STRIPE_PRICES_LOOKUP_KEY,
     EMAIL_SERVER_HOST: process.env.EMAIL_SERVER_HOST,
     EMAIL_SERVER_PORT: Number(process.env.EMAIL_SERVER_PORT),
     EMAIL_SERVER_USER: process.env.EMAIL_SERVER_USER,

@@ -14,7 +14,7 @@ import Image from "next/image";
 import {useFormStatus} from "react-dom";
 import {StatefulButton} from "@/components/molecules/statefulButton";
 
-const stripePromise = loadStripe("pk_test_51P1AmKCXdJySzBrwMRrBq5Yd3f81PjV28336BzQucXcanzg5sNymExQdY2f3fTPPzwzsVM06OnGYOpbhWr0JFEtN00mLPVBtXl");
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!!);
 
 // @ts-ignore
 export function StepForm({form, state}) {

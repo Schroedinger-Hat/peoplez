@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "@/server/db";
+import { db } from "@/services/db";
 
 export async function createUser(prevState: any, formData: FormData) {
   const user = await db.user.findFirst({
