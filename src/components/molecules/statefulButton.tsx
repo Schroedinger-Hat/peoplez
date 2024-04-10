@@ -1,5 +1,6 @@
-import {Button, type ButtonProps} from "@/components/ui/button";
 import {noop} from "lodash";
+
+import {Button, type ButtonProps} from "@/components/ui/button";
 
 interface StatefulButtonProps extends ButtonProps {
     loading: boolean

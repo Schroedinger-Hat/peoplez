@@ -1,10 +1,11 @@
 import "@/styles/globals.css";
-import {getServerAuthSession} from "@/server/auth";
-import Link from "next/link";
+
 import Image from "next/image";
-import logo from "@/images/logo.svg";
+import Link from "next/link";
+import React from "react";
+
 import {membersMenuTreeConfig} from "@/app/members/const";
-import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
+import {LogoutButton} from "@/components/molecules/logoutButton";
 import {Button} from "@/components/ui/button";
 import {
     DropdownMenu,
@@ -13,9 +14,10 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
+import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
+import logo from "@/images/logo.svg";
 import {usernameToInitials} from "@/lib/utils";
-import {LogoutButton} from "@/components/molecules/logoutButton";
-import React from "react";
+import {getServerAuthSession} from "@/server/auth";
 
 export const metadata = {
     title: "Create T3 App",

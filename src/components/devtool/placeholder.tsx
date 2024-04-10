@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import placeholder from '@/images/placeholder.svg'
 
 interface PlaceholderInterface {

@@ -1,4 +1,4 @@
-import {Body, Container, Head, Heading, Hr, Html, Img, Preview, Section, Link, Text} from "@react-email/components";
+import {Body, Container, Head, Heading, Hr, Html, Img, Link, Preview, Section, Text} from "@react-email/components";
 import * as React from "react";
 
 const baseUrl = process.env.VERCEL_URL

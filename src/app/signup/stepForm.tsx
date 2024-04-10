@@ -1,20 +1,21 @@
 'use client'
 
+import {Elements, PaymentElement, useElements, useStripe} from "@stripe/react-stripe-js";
+import {loadStripe} from "@stripe/stripe-js";
+import Image from "next/image";
+import Link from "next/link";
 import {useState} from "react";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import {Input} from "@/components/ui/input";
+import {useFormStatus} from "react-dom";
+import {type UseFormReturn} from "react-hook-form";
+
+import type {ServerActionState} from "@/app/actions/types";
+import {MembershipCard, PricePeriod, PriceUnit} from "@/app/signup/components/membershipCard";
+import {StatefulButton} from "@/components/molecules/statefulButton";
 import {Button} from "@/components/ui/button";
 import {Checkbox} from "@/components/ui/checkbox";
-import Link from "next/link";
-import {Elements, PaymentElement, useElements, useStripe} from "@stripe/react-stripe-js";
-import {MembershipCard, PricePeriod, PriceUnit} from "@/app/signup/components/membershipCard";
-import {loadStripe} from "@stripe/stripe-js";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {Input} from "@/components/ui/input";
 import checkmark from '@/images/checkmark.svg'
-import Image from "next/image";
-import {useFormStatus} from "react-dom";
-import {StatefulButton} from "@/components/molecules/statefulButton";
-import {type UseFormReturn} from "react-hook-form";
-import type {ServerActionState} from "@/app/actions/types";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 

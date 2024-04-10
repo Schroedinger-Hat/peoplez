@@ -1,11 +1,12 @@
 'use client'
 
+import {zodResolver} from "@hookform/resolvers/zod";
+import {useFormState} from "react-dom";
 import {useForm} from "react-hook-form";
 import {z} from "zod";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {StepForm} from "@/app/signup/stepForm";
-import {useFormState} from "react-dom";
+
 import {createMembership} from "@/app/actions/createMembership";
+import {StepForm} from "@/app/signup/stepForm";
 
 const formSchema = z.object({
     firstName: z

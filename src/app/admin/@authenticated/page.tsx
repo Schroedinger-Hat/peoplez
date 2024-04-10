@@ -1,9 +1,10 @@
-import {getServerAuthSession} from "@/server/auth";
+import Link from "next/link";
+
+import {Placeholder} from "@/components/devtool/placeholder";
+import {Button} from "@/components/ui/button";
 import {Card, CardContent, CardHeader} from "@/components/ui/card";
 import {LinkLabel, Paragraph, SectionTitle} from "@/components/ui/typography";
-import {Button} from "@/components/ui/button";
-import {Placeholder} from "@/components/devtool/placeholder";
-import Link from "next/link";
+import {getServerAuthSession} from "@/server/auth";
 
 export default async function AdminHomePage() {
     const session = await getServerAuthSession()

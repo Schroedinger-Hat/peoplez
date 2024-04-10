@@ -1,8 +1,9 @@
 import Image from "next/image"
-import {buttonVariants} from "@/components/ui/button";
 import Link from "next/link";
-import {cn} from "@/lib/utils";
+
+import {buttonVariants} from "@/components/ui/button";
 import logoWhite from '@/images/logo-white.svg'
+import {cn} from "@/lib/utils";
 
 export default function SignUpLayout({
                                          children,

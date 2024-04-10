@@ -1,7 +1,7 @@
 'use client'
 
-import {usePathname} from "next/navigation";
 import Link, {type LinkProps} from "next/link";
+import {usePathname} from "next/navigation";
 import {type ReactNode} from "react";
 
 interface LinkWithActiveProps extends LinkProps{

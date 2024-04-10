@@ -1,6 +1,7 @@
-import {LinkWithActive} from "@/components/molecules/linkWithActive";
-import {adminMenuTreeConfig} from "@/app/admin/const";
 import {find} from "lodash";
+
+import {adminMenuTreeConfig} from "@/app/admin/const";
+import {LinkWithActive} from "@/components/molecules/linkWithActive";
 
 interface AdminAuthenticatedLayoutInterface {
     children: React.ReactNode

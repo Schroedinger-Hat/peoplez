@@ -1,6 +1,7 @@
 import Image from "next/image";
-import logo from "@/images/logo-white.svg";
 import Link from "next/link";
+
+import logo from "@/images/logo-white.svg";
 
 export default function LegalLayout({children}: { children: React.ReactNode }) {
     return (

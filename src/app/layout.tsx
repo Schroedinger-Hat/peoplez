@@ -1,5 +1,7 @@
 import "@/styles/globals.css";
+
 import {Inter} from "next/font/google";
+
 import NextAuthProvider from "@/context/NextAuthProvider";
 
 const inter = Inter({

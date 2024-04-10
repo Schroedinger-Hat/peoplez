@@ -1,8 +1,9 @@
+import {toPlainObject} from "lodash";
 import Link from "next/link";
-import {getServerAuthSession} from "@/server/auth";
+
 import {Debug} from "@/components/devtool/debug";
 import {Button} from "@/components/ui/button";
-import {toPlainObject} from "lodash";
+import {getServerAuthSession} from "@/server/auth";
 
 export async function DevPage() {
     const session = await getServerAuthSession()

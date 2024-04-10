@@ -1,7 +1,7 @@
 "use server";
 
-import {db} from "@/services/db";
 import {type ServerActionState, ServerActionStatus} from "@/app/actions/types";
+import {db} from "@/services/db";
 
 export async function createUser(prevState: ServerActionState, formData: FormData): Promise<ServerActionState> {
     const user = await db.user.findFirst({

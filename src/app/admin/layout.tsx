@@ -1,7 +1,12 @@
-import {getServerAuthSession} from "@/server/auth";
+import {UserRole} from "@prisma/client";
+import Image from "next/image";
 import Link from "next/link";
+
+import {Logout} from "@/app/admin/@unauthenticated/components/logout";
+import {adminMenuTreeConfig} from "@/app/admin/const";
+import {LogoutButton} from "@/components/molecules/logoutButton";
 import {Button} from "@/components/ui/button";
-import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
+import {Card, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -10,15 +15,11 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import {LogoutButton} from "@/components/molecules/logoutButton";
+import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
 import logo from "@/images/logo.svg";
-import Image from "next/image";
-import {adminMenuTreeConfig} from "@/app/admin/const";
 import {hasRequiredRole} from "@/lib/permissions";
-import {UserRole} from "@prisma/client";
-import {Card, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
-import {Logout} from "@/app/admin/@unauthenticated/components/logout";
 import {usernameToInitials} from "@/lib/utils";
+import {getServerAuthSession} from "@/server/auth";
 
 interface LayoutInterface {
     children: React.ReactNode;

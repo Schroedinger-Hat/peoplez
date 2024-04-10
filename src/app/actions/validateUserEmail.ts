@@ -1,7 +1,8 @@
 "use server";
 
-import {db} from "@/services/db";
 import {MembershipStatus} from "@prisma/client";
+
+import {db} from "@/services/db";
 
 export interface ServerActionState {
     checked: boolean,
