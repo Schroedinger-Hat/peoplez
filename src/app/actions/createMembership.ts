@@ -3,10 +3,11 @@
 import {db} from "@/services/db";
 import {stripe} from "@/services/stripe";
 import {MembershipStatus} from "@prisma/client";
+import {type ServerActionState, ServerActionStatus} from "@/app/actions/types";
 
 const MEMBERSHIP_PRICE_ID = 'price_1P3HNlCXdJySzBrwlcoAQqS2'
 
-export async function createMembership(prevState: any, formData: FormData) {
+export async function createMembership(prevState: ServerActionState, formData: FormData): Promise<ServerActionState> {
     // Avoid double membership creation
     if (prevState.nextStep === 'providePayment') return prevState
 
@@ -57,8 +58,10 @@ export async function createMembership(prevState: any, formData: FormData) {
     // Membership already exists, block creation
     if (membership) {
         return {
-            status: "error",
-            message: "Membership already exists",
+            status: ServerActionStatus.Error,
+            errors: [{
+                message: "Membership already exists"
+            }],
         }
     }
 
@@ -80,7 +83,7 @@ export async function createMembership(prevState: any, formData: FormData) {
         payment_behavior: 'default_incomplete',
         expand: ['latest_invoice.payment_intent'],
         payment_settings: {
-            payment_method_types: ['card', 'link', 'paypal','sepa_debit']
+            payment_method_types: ['card', 'link', 'paypal', 'sepa_debit']
         }
     });
 
@@ -93,9 +96,10 @@ export async function createMembership(prevState: any, formData: FormData) {
 
     // Return secret to client to finalize payment
     return {
-        status: 'success',
+        status: ServerActionStatus.Success,
         payload: {
-            clientSecret: stripeSubscription.latest_invoice.payment_intent.client_secret,
+            // eslint-disable-next-line
+            clientSecret: stripeSubscription?.latest_invoice?.payment_intent?.client_secret,
             membershipId: membership.id,
         },
         nextStep: 'providePayment'

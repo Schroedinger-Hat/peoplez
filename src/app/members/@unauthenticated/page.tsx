@@ -12,7 +12,7 @@ import {z} from "zod";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useEffect, useState} from "react";
-import {validateUserEmail} from "@/app/actions/validateUserEmail";
+import {type ServerActionState, validateUserEmail} from "@/app/actions/validateUserEmail";
 import {signIn} from "next-auth/react";
 
 export default function MembershipPortalLoginPage() {
@@ -30,8 +30,7 @@ export default function MembershipPortalLoginPage() {
     });
 
     useEffect(() => {
-        let handler: () => Promise<void>;
-        handler = async () => {
+        const handler = async () => {
             if (!requestedMagicLink && validateUserEmailState.valid) {
                 setWorking(true)
                 const reply = await signIn('email', {
@@ -44,7 +43,7 @@ export default function MembershipPortalLoginPage() {
             }
         };
 
-        handler()
+        void handler()
     }, [requestedMagicLink, validateUserEmailState])
 
     return (
@@ -66,7 +65,14 @@ const formSchema = z.object({
 });
 
 // TODO: Too much props drilling, refactor to shared zustand state
-function LoginForm({form, state, working, requestedMagicLink}) {
+interface LoginFormProps {
+    form: unknown
+    state: ServerActionState
+    working: boolean
+    requestedMagicLink: boolean
+}
+
+function LoginForm({form, state, working, requestedMagicLink}: LoginFormProps) {
     const formStatus = useFormStatus();
 
     return (
@@ -80,7 +86,7 @@ function LoginForm({form, state, working, requestedMagicLink}) {
                 </CardHeader>
                 <CardContent className="grid gap-4">
                     {
-                        (state.checked && state.valid === false) && <Alert variant="destructive">
+                        (state?.checked && state?.valid === false) && <Alert variant="destructive">
                             <ExclamationTriangleIcon className="h-4 w-4"/>
                             <AlertTitle>Error</AlertTitle>
                             <AlertDescription>
@@ -107,7 +113,7 @@ function LoginForm({form, state, working, requestedMagicLink}) {
                         !requestedMagicLink && <>
                             <div className="grid">
                                 <FormField
-                                    control={form.control}
+                                    control={form?.control}
                                     name="email"
                                     render={({field}) => (
                                         <FormItem>

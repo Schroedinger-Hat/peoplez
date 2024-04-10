@@ -6,7 +6,6 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {StepForm} from "@/app/signup/stepForm";
 import {useFormState} from "react-dom";
 import {createMembership} from "@/app/actions/createMembership";
-import {loadStripe} from "@stripe/stripe-js";
 
 const formSchema = z.object({
     firstName: z

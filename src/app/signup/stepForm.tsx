@@ -13,13 +13,28 @@ import checkmark from '@/images/checkmark.svg'
 import Image from "next/image";
 import {useFormStatus} from "react-dom";
 import {StatefulButton} from "@/components/molecules/statefulButton";
+import {type UseFormReturn} from "react-hook-form";
+import type {ServerActionState} from "@/app/actions/types";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
-// @ts-ignore
-export function StepForm({form, state}) {
+interface StepFormProps {
+    form: UseFormReturn
+    state: ServerActionState
+}
+
+export function StepForm({form, state}: StepFormProps) {
     const [step, setStep] = useState<number>(1)
     const formState = useFormStatus()
+
+    const validateStep1 = async (): Promise<void> => {
+        await form.trigger(['name', 'surname', 'email'])
+        setStep(2)
+    }
+    const validateStep2 = async (): Promise<void> => {
+        await form.trigger(['socialSecurityCode', 'statuteApproval'])
+        setStep(3)
+    }
 
     return (
         <Form {...form}>
@@ -76,8 +91,7 @@ export function StepForm({form, state}) {
 
                         <div className={'col-span-2 pt-3'}>
                             <div className={'flex-row-reverse flex'}>
-                                <Button
-                                    onClick={async () => await form.trigger(['name', 'surname', 'email']) && setStep(2)}>Continue</Button>
+                                <Button onClick={validateStep1}>Continue</Button>
                             </div>
                         </div>
                     </div>
@@ -154,8 +168,7 @@ export function StepForm({form, state}) {
 
                     <div className={'col-span-2 pt-3'}>
                         <div className={'flex-row-reverse flex'}>
-                            <Button
-                                onClick={async () => await form.trigger(['socialSecurityCode', 'statuteApproval']) && setStep(3)}>Continue</Button>
+                            <Button onClick={validateStep2}>Continue</Button>
                         </div>
                     </div>
                 </div>
@@ -220,19 +233,24 @@ export function StepForm({form, state}) {
     )
 }
 
-function Step4({state, setStep}) {
+interface Step4Props {
+    state: ServerActionState
+    setStep: unknown
+}
+
+function Step4({state, setStep}: Step4Props) {
     const stripe = useStripe()
     const elements = useElements()
 
     const handlePaymentSubmit = async () => {
-        elements?.submit()
+        await elements?.submit()
         const confirmPayment = await stripe?.confirmPayment({
             elements,
             redirect: 'if_required',
-            clientSecret: state.payload.clientSecret
+            clientSecret: state?.payload?.clientSecret
         });
         console.log(confirmPayment)
-        if (confirmPayment?.paymentIntent.status === 'succeeded') {
+        if (confirmPayment?.paymentIntent?.status === 'succeeded') {
             setStep(5)
         }
     }
@@ -244,7 +262,7 @@ function Step4({state, setStep}) {
             </p>
 
             <div>
-            <PaymentElement/>
+                <PaymentElement/>
             </div>
 
             <div className={'col-span-2 pt-3'}>

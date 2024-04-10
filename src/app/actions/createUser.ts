@@ -1,38 +1,40 @@
 "use server";
 
-import { db } from "@/services/db";
+import {db} from "@/services/db";
+import {type ServerActionState, ServerActionStatus} from "@/app/actions/types";
 
-export async function createUser(prevState: any, formData: FormData) {
-  const user = await db.user.findFirst({
-    where: {
-      email: formData.email,
-    },
-  });
+export async function createUser(prevState: ServerActionState, formData: FormData): Promise<ServerActionState> {
+    const user = await db.user.findFirst({
+        where: {
+            email: formData.email,
+        },
+    });
 
-  if (user) {
+    if (user) {
+        return {
+            status: ServerActionStatus.Error,
+            errors: [{
+                message: "User already exist"
+            }],
+        };
+    }
+
+    const newUser = await db.user.create({
+        data: {
+            email: formData.email,
+            name: "Davide Imola",
+        },
+    });
+
+    await db.membership.create({
+        data: {
+            userId: newUser.id,
+            status: "PENDING",
+            stripeSubscriptionId: "xxx",
+        },
+    });
+
     return {
-      status: "error",
-      message: "User already exist",
+        status: ServerActionStatus.Success
     };
-  }
-
-  const newUser = await db.user.create({
-    data: {
-      email: formData.email,
-      name: "Davide Imola",
-    },
-  });
-
-  await db.membership.create({
-    data: {
-      userId: newUser.id,
-      status: "PENDING",
-      stripeSubscriptionId: "xxx",
-    },
-  });
-
-  return {
-    status: "success",
-    message: `Welcome, ${formData.email}`,
-  };
 }

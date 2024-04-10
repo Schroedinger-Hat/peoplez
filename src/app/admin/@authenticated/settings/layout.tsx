@@ -1,4 +1,4 @@
-import {LinkWithActive} from "@/components/ui/linkWithActive";
+import {LinkWithActive} from "@/components/molecules/linkWithActive";
 import {adminMenuTreeConfig} from "@/app/admin/const";
 import {find} from "lodash";
 
@@ -7,6 +7,8 @@ interface AdminAuthenticatedLayoutInterface {
 }
 
 export default async function AdminAuthenticatedLayout({children}: AdminAuthenticatedLayoutInterface) {
+    const settingsChildren = find(adminMenuTreeConfig, {id: 'settings'})!
+
     return (
         <>
             <div className="mx-auto grid w-full max-w-6xl gap-2">
@@ -16,9 +18,7 @@ export default async function AdminAuthenticatedLayout({children}: AdminAuthenti
                 className="mx-auto grid w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">
                 <nav className="grid gap-4 text-sm text-muted-foreground">
                     {
-                        find(adminMenuTreeConfig, {id: 'settings'})
-                            .children
-                            .map((item: any) => <LinkWithActive href={item.url}>{item.label}</LinkWithActive>)
+                        settingsChildren.children!.map((item) => <LinkWithActive key={item.id} href={item.url}>{item.label}</LinkWithActive>)
                     }
                 </nav>
                 <div className="grid gap-6">

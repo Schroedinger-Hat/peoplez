@@ -1,5 +1,5 @@
 import {getServerAuthSession} from "@/server/auth";
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
+import {Card, CardContent, CardHeader} from "@/components/ui/card";
 import {LinkLabel, Paragraph, SectionTitle} from "@/components/ui/typography";
 import {Button} from "@/components/ui/button";
 import {Placeholder} from "@/components/devtool/placeholder";

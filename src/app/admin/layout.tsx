@@ -27,7 +27,6 @@ interface LayoutInterface {
 }
 
 export default async function Layout({
-                                         children,
                                          authenticated,
                                          unauthenticated,
                                      }: LayoutInterface) {
@@ -83,6 +82,7 @@ export default async function Layout({
                     {
                         adminMenuTreeConfig.map(mainMenuItem => (
                             <Link href={mainMenuItem.url}
+                                  key={mainMenuItem.id}
                                   className="text-muted-foreground transition-colors hover:text-foreground">
                                 {mainMenuItem.label}
                             </Link>
@@ -111,6 +111,7 @@ export default async function Layout({
                             {
                                 adminMenuTreeConfig.map(mainMenuItem => (
                                     <Link href={mainMenuItem.url}
+                                          key={mainMenuItem.id}
                                           className="text-muted-foreground hover:text-foreground">
                                         {mainMenuItem.label}
                                     </Link>
@@ -123,7 +124,7 @@ export default async function Layout({
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant="secondary" size="icon" className="rounded-full">
-                                {usernameToInitials(session.user.name || '')}
+                                {usernameToInitials(session.user.name ?? '')}
                                 <span className="sr-only">Toggle user menu</span>
                             </Button>
                         </DropdownMenuTrigger>

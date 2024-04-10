@@ -2,7 +2,8 @@
 import {isNil} from "lodash";
 import {type UserRole} from "@prisma/client";
 
-export function hasRequiredRole(role: UserRole, session: any) {
+export function hasRequiredRole(role: UserRole, session: unknown) {
     if (isNil(session)) return false
+    // eslint-disable-next-line
     return session?.user?.role === role
 }

@@ -1,5 +1,4 @@
 import "@/styles/globals.css";
-import {Inter} from "next/font/google";
 import {getServerAuthSession} from "@/server/auth";
 import Link from "next/link";
 import Image from "next/image";
@@ -17,11 +16,6 @@ import {
 import {usernameToInitials} from "@/lib/utils";
 import {LogoutButton} from "@/components/molecules/logoutButton";
 import React from "react";
-
-const inter = Inter({
-    subsets: ["latin"],
-    variable: "--font-sans",
-});
 
 export const metadata = {
     title: "Create T3 App",
@@ -110,7 +104,7 @@ export default async function RootLayout({
                             <DropdownMenuTrigger asChild>
                                 <Button variant="secondary" size="icon" className="rounded-full bg-gray-300">
                                     <span className="sr-only">Toggle user menu</span>
-                                    {usernameToInitials(session?.user.name || '')}
+                                    {usernameToInitials(session?.user.name ?? '')}
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">

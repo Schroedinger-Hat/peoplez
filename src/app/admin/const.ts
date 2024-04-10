@@ -1,4 +1,11 @@
-export const adminMenuTreeConfig = [
+export interface MenuItem {
+    url: string
+    label: string
+    id: string
+    children?: MenuItem[]
+}
+
+export const adminMenuTreeConfig: MenuItem[] = [
     {
         url: '/admin/membership',
         label: 'Membership',
@@ -13,7 +20,7 @@ export const adminMenuTreeConfig = [
         url: '/admin/settings',
         label: 'Settings',
         id: 'settings',
-        children:[
+        children: [
             {
                 url: '/admin/settings',
                 label: 'General',

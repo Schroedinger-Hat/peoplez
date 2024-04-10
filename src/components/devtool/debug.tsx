@@ -2,7 +2,7 @@
 
 interface DebugInterface {
     title?: string
-    children: any
+    children: unknown
 }
 
 export function Debug({title, children}: DebugInterface) {
