@@ -13,18 +13,20 @@ export const metadata = {
     icons: [{rel: "icon", url: "/favicon.ico"}],
 };
 
-export default function RootLayout({
-                                       children,
-                                   }: {
+interface LayoutInterface {
     children: React.ReactNode;
-}) {
+}
+
+export default async function RootLayout({
+                                             children,
+                                         }: LayoutInterface) {
     return (
         <html lang="en">
-            <body className={`font-sans ${inter.variable}`}>
-                <NextAuthProvider>
-                    {children}
-                </NextAuthProvider>
-            </body>
+        <body className={`font-sans ${inter.variable}`}>
+        <NextAuthProvider>
+            {children}
+        </NextAuthProvider>
+        </body>
         </html>
     );
 }

@@ -10,7 +10,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import {LogoutButton} from "@/app/admin/@authenticated/components/logout";
+import {LogoutButton} from "@/components/molecules/logoutButton";
 import logo from "@/images/logo.svg";
 import Image from "next/image";
 import {adminMenuTreeConfig} from "@/app/admin/const";
@@ -18,10 +18,7 @@ import {hasRequiredRole} from "@/lib/permissions";
 import {UserRole} from "@prisma/client";
 import {Card, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {Logout} from "@/app/admin/@unauthenticated/components/logout";
-
-function usernameToInitials(username: string) {
-    return username.split(' ').filter(Boolean).slice(0, 2).map((word: string) => word[0]).join('').toUpperCase()
-}
+import {usernameToInitials} from "@/lib/utils";
 
 interface LayoutInterface {
     children: React.ReactNode;
@@ -131,7 +128,7 @@ export default async function Layout({
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                            <DropdownMenuLabel>{session.user.email}</DropdownMenuLabel>
                             <DropdownMenuSeparator/>
                             <DropdownMenuItem>Settings</DropdownMenuItem>
                             <Link href={'/documents/help'}>
