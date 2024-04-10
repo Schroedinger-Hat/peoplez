@@ -26,7 +26,7 @@ interface Membership {
 
 
 export function MembershipCard({title, features, description, price, showPrice = true}: Membership) {
-    let moneyFormatter = new Intl.NumberFormat('en-US', {
+    const moneyFormatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: price.unit,
         minimumFractionDigits: 0,

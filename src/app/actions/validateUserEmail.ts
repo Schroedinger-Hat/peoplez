@@ -14,7 +14,7 @@ export async function validateUserEmail(prevState: any, formData: FormData) {
     if (!user) return {checked: true, valid: false};
 
     // User without membership means that is not valid
-    let membership = await db.membership.findFirst({
+    const membership = await db.membership.findFirst({
         where: {
             userId: user.id,
             status: {
