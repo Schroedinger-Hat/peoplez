@@ -1,8 +1,8 @@
 // Receives a required role and a session and return a boolean indicating if the provided session matches the required role
-import {isNil} from "lodash";
-import {UserRole} from "@prisma/client";
+import { type UserRole } from "@prisma/client";
+import { isNil } from "lodash";
 
-export function hasRequiredRole(role: UserRole, session: any) {
-    if (isNil(session)) return false
-    return session?.user?.role === role
+export function hasRequiredRole(role: UserRole, session: unknown) {
+  if (isNil(session)) return false;
+  return (session as any)?.user?.role === role;
 }

@@ -1,19 +1,20 @@
-import {create} from "zustand";
+import { create } from "zustand";
 
 interface SignUpState {
-    name: string
-    surname: string
-    email: string
-    socialSecurityNumber: string
+  name: string;
+  surname: string;
+  email: string;
+  socialSecurityNumber: string;
 }
 
-export const useSignUpStore = create<SignUpState>(set => ({
-    name: "",
-    surname: "",
-    email: "",
-    socialSecurityNumber: "",
-    setName: (name: string) => set(() => ({name: name})),
-    setSurname: (surname: string) => set(() => ({surname: surname})),
-    setEmail: (email: string) => set(() => ({email: email})),
-    setSocialSecurityNumber: (socialSecurityNumber: string) => set(() => ({socialSecurityNumber: socialSecurityNumber})),
-}))
+export const useSignUpStore = create<SignUpState>((set) => ({
+  email: "",
+  name: "",
+  setEmail: (email: string) => set(() => ({ email: email })),
+  setName: (name: string) => set(() => ({ name: name })),
+  setSocialSecurityNumber: (socialSecurityNumber: string) =>
+    set(() => ({ socialSecurityNumber: socialSecurityNumber })),
+  setSurname: (surname: string) => set(() => ({ surname: surname })),
+  socialSecurityNumber: "",
+  surname: "",
+}));

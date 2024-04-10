@@ -1,28 +1,52 @@
 "use server";
 
-import {db} from "@/services/db";
-import {MembershipStatus} from "@prisma/client";
+import { MembershipStatus } from "@prisma/client";
 
-export async function validateUserEmail(prevState: any, formData: FormData) {
-    const user = await db.user.findUnique({
-        where: {
-            email: formData.email,
-        },
-    });
+import { db } from "@/services/db";
 
-    // No user means that is not valid
-    if (!user) return {checked: true, valid: false};
+export interface ServerActionState {
+  checked: boolean;
+  valid: boolean;
+  email?: string;
+}
+interface FormProps {
+  email: string;
+}
+export async function validateUserEmail(
+  prevState: ServerActionState,
+  data: FormProps,
+) {
+  const user = await db.user.findUnique({
+    where: {
+      email: data.email,
+    },
+  });
 
-    // User without membership means that is not valid
-    let membership = await db.membership.findFirst({
-        where: {
-            userId: user.id,
-            status: {
-                not: MembershipStatus.PENDING
-            }
-        }
-    })
-    if (!membership) return {checked: true, valid: false};
+  // No user means that is not valid
+  if (!user)
+    return {
+      checked: true,
+      valid: false,
+    };
 
-    return {checked: true, valid: true, email: formData.email};
+  // User without membership means that is not valid
+  const membership = await db.membership.findFirst({
+    where: {
+      status: {
+        not: MembershipStatus.PENDING,
+      },
+      userId: user.id,
+    },
+  });
+  if (!membership)
+    return {
+      checked: true,
+      valid: false,
+    };
+
+  return {
+    checked: true,
+    email: data.email,
+    valid: true,
+  };
 }
