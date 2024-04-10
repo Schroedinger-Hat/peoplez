@@ -11,7 +11,7 @@ import { stripe } from "@/services/stripe";
 
 const MEMBERSHIP_PRICE_ID = "price_1P3HNlCXdJySzBrwlcoAQqS2";
 
-interface FormProps {
+export interface FormProps {
   email: string;
   firstName: string;
   lastName: string;

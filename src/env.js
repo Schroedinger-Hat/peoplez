@@ -8,7 +8,7 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string(),
   },
 
   /**
@@ -64,7 +64,6 @@ export const env = createEnv({
     MARKETING_NAME: z.string(),
     MARKETING_WEBSITE_URL: z.string(),
 
-    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string(),
     NEXTAUTH_SECRET:
       process.env.NODE_ENV === "production"
         ? z.string()

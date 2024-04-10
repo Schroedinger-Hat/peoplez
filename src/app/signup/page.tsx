@@ -10,12 +10,15 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 import { useFormState } from "react-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { createMembership } from "@/app/actions/createMembership";
+import {
+  createMembership,
+  type FormProps,
+} from "@/app/actions/createMembership";
 import type { ServerActionState } from "@/app/actions/types";
 import { ServerActionStatus } from "@/app/actions/types";
 import {
@@ -82,21 +85,20 @@ export default function SignupPage() {
     resolver: zodResolver(formSchema),
   });
 
-  const handleForm = async (data: FormData) => {
+  const handleForm = async (data: FormProps) => {
     if (createMembershipState.nextStep === "confirmPayment") {
     } else {
       createMembershipAction(data);
     }
   };
-
   const [step, setStep] = useState<number>(1);
 
   const validateStep1 = async (): Promise<void> => {
-    await form.trigger(["name", "surname", "email"]);
+    await form.trigger(["firstName", "lastName", "email"]);
     setStep(2);
   };
   const validateStep2 = async (): Promise<void> => {
-    await form.trigger(["socialSecurityCode", "statuteApproval"]);
+    await form.trigger(["socialSecurityNumber", "statuteApproval"]);
     setStep(3);
   };
 
@@ -112,7 +114,7 @@ export default function SignupPage() {
         </p>
       </div>
 
-      <form action={form.handleSubmit(handleForm)}>
+      <form action={form.handleSubmit(handleForm) as any}>
         <Form {...form}>
           {/*Account data*/}
           {createMembershipState.status === ServerActionStatus.Pending &&
@@ -305,7 +307,8 @@ export default function SignupPage() {
               <Elements
                 stripe={stripePromise}
                 options={{
-                  clientSecret: createMembershipState?.payload?.clientSecret,
+                  clientSecret: (createMembershipState?.payload as any)
+                    ?.clientSecret,
                 }}
               >
                 <Step4 state={createMembershipState} setStep={setStep} />
@@ -337,7 +340,7 @@ export default function SignupPage() {
 
 interface Step4Props {
   state: ServerActionState;
-  setStep: unknown;
+  setStep: Dispatch<SetStateAction<number>>;
 }
 
 function Step4({ state, setStep }: Step4Props) {
@@ -347,12 +350,12 @@ function Step4({ state, setStep }: Step4Props) {
   const handlePaymentSubmit = async () => {
     await elements?.submit();
     const confirmPayment = await stripe?.confirmPayment({
-      clientSecret: state?.payload?.clientSecret,
-      elements,
+      clientSecret: (state?.payload as any)?.clientSecret,
+      elements: elements!,
       redirect: "if_required",
     });
     console.log(confirmPayment);
-    if (confirmPayment?.paymentIntent?.status === "succeeded") {
+    if ((confirmPayment?.paymentIntent as any)?.status === "succeeded") {
       setStep(5);
     }
   };

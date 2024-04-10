@@ -4,6 +4,5 @@ import { isNil } from "lodash";
 
 export function hasRequiredRole(role: UserRole, session: unknown) {
   if (isNil(session)) return false;
-  // eslint-disable-next-line
-    return session?.user?.role === role
+  return (session as any)?.user?.role === role;
 }
