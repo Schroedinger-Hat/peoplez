@@ -2,7 +2,7 @@ import {
   MembershipCard,
   PricePeriod,
   PriceUnit,
-} from "@/app/signup/components/membershipCard";
+} from "@/components/molecules/membershipCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getServerAuthSession } from "@/server/auth";
 

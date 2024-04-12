@@ -10,6 +10,23 @@ export const adminMenuTreeConfig: MenuItem[] = [
     id: "membership",
     label: "Membership",
     url: "/admin/membership",
+    children: [
+      {
+        id: "membership-all",
+        label: "Active",
+        url: "/admin/membership",
+      },
+      {
+        id: "membership-pending-review",
+        label: "Pending Review",
+        url: "/admin/membership/pending-review",
+      },
+      {
+        id: "membership-manage",
+        label: "Manage",
+        url: "/admin/membership/manage",
+      },
+    ],
   },
   {
     id: "users",
