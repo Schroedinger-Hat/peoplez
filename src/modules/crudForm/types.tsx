@@ -1,4 +1,4 @@
 export enum CRUDFormIntent {
-    Create,
-    Edit,
+  Create,
+  Edit,
 }

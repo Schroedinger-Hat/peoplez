@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Debug } from "@/components/devtool/debug";
 import { Button } from "@/components/ui/button";
 import { getServerAuthSession } from "@/server/auth";
-import {env} from "@/env";
+import { env } from "@/env";
 
 export async function DevPage() {
   const session = await getServerAuthSession();

@@ -26,7 +26,7 @@ import logo from "@/images/logo.svg";
 import { hasRequiredRole } from "@/lib/permissions";
 import { usernameToInitials } from "@/lib/utils";
 import { getServerAuthSession } from "@/server/auth";
-import {Toaster} from "@/components/ui/toaster";
+import { Toaster } from "@/components/ui/toaster";
 
 interface LayoutInterface {
   children: React.ReactNode;
