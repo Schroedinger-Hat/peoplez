@@ -1,9 +1,9 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card"
 
 interface Price {
-  value: number;
-  period: PricePeriod;
-  unit: PriceUnit;
+  value: number
+  period: PricePeriod
+  unit: PriceUnit
 }
 
 export enum PriceUnit {
@@ -17,11 +17,11 @@ export enum PricePeriod {
 }
 
 interface Membership {
-  showPrice?: boolean;
-  title: string;
-  features: string[];
-  description?: string;
-  price: Price;
+  showPrice?: boolean
+  title: string
+  features: string[]
+  description?: string
+  price: Price
 }
 
 export function MembershipCard({
@@ -35,7 +35,7 @@ export function MembershipCard({
     currency: price.unit,
     minimumFractionDigits: 0,
     style: "currency",
-  });
+  })
 
   return (
     <Card>
@@ -63,5 +63,5 @@ export function MembershipCard({
         )}
       </CardContent>
     </Card>
-  );
+  )
 }

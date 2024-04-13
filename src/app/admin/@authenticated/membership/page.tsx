@@ -5,5 +5,5 @@ export default async function AdminMembershipPage() {
         <h1 className="text-3xl font-semibold">Membership</h1>
       </div>
     </>
-  );
+  )
 }

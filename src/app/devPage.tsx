@@ -1,12 +1,12 @@
-import { toPlainObject } from "lodash";
-import Link from "next/link";
+import { toPlainObject } from "lodash"
+import Link from "next/link"
 
-import { Debug } from "@/components/devtool/debug";
-import { Button } from "@/components/ui/button";
-import { getServerAuthSession } from "@/server/auth";
+import { Debug } from "@/components/devtool/debug"
+import { Button } from "@/components/ui/button"
+import { getServerAuthSession } from "@/server/auth"
 
 export async function DevPage() {
-  const session = await getServerAuthSession();
+  const session = await getServerAuthSession()
 
   return (
     <div className={"h-dvh bg-gray-200 p-4"}>
@@ -42,5 +42,5 @@ export async function DevPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }

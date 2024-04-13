@@ -2,12 +2,12 @@ import {
   MembershipCard,
   PricePeriod,
   PriceUnit,
-} from "@/app/signup/components/membershipCard";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getServerAuthSession } from "@/server/auth";
+} from "@/app/signup/components/membershipCard"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { getServerAuthSession } from "@/server/auth"
 
 export default async function MembershipPortalHomePage() {
-  const session = await getServerAuthSession();
+  const session = await getServerAuthSession()
 
   return (
     <>
@@ -76,5 +76,5 @@ export default async function MembershipPortalHomePage() {
         </div>
       </div>
     </>
-  );
+  )
 }
