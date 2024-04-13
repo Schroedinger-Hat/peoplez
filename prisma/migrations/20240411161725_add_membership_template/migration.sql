@@ -14,9 +14,10 @@ CREATE TABLE "MembershipTemplate" (
     "pricePeriod" "PricePeriod" NOT NULL DEFAULT 'Yearly',
     "priceUnit" "PriceUnit" NOT NULL DEFAULT 'EUR',
     "stripePriceId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL;
 
     CONSTRAINT "MembershipTemplate_pkey" PRIMARY KEY ("id")
 );
 
-ALTER TABLE "MembershipTemplate" ADD COLUMN     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-ADD COLUMN     "updatedAt" TIMESTAMP(3) NOT NULL;
+CREATE UNIQUE INDEX "MembershipTemplate_stripePriceId_key" ON "MembershipTemplate"("stripePriceId");

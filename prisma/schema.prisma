@@ -116,7 +116,7 @@ model MembershipTemplate {
   priceAmount     Int
   pricePeriod     PricePeriod   @default(Yearly)
   priceUnit       PriceUnit     @default(EUR)
-  stripePriceId   String
+  stripePriceId   String        @unique
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 }

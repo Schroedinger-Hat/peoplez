@@ -28,7 +28,7 @@ export default async function AdminMembershipPage() {
     return (
         <>
             <div className="flex justify-end">
-                <Link href={'/admin/membership/manage/create/10'} passHref>
+                <Link href={'/admin/membership/manage/create'} passHref>
                     <Button>Create</Button>
                 </Link>
             </div>
@@ -43,18 +43,22 @@ export default async function AdminMembershipPage() {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {membershipTemplates.map((membershipTemplate: MembershipTemplate) => (
-                            <TableRow key={membershipTemplate.id}>
-                                <TableCell>{membershipTemplate.id}</TableCell>
-                                <TableCell className="font-medium">{membershipTemplate.title}</TableCell>
-                                <TableCell><FormatPrice element={membershipTemplate}/></TableCell>
-                                <TableCell className={'flex justify-end'}>
-                                    <Button variant={'outline'} size={'xs'}>
-                                        <Pencil1Icon/>
-                                    </Button>
-                                </TableCell>
-                            </TableRow>
-                        ))}
+                        {
+                            membershipTemplates.map((membershipTemplate: MembershipTemplate) => (
+                                <TableRow key={membershipTemplate.id}>
+                                    <TableCell>{membershipTemplate.id}</TableCell>
+                                    <TableCell className="font-medium">{membershipTemplate.title}</TableCell>
+                                    <TableCell><FormatPrice element={membershipTemplate}/></TableCell>
+                                    <TableCell className={'flex justify-end'}>
+                                        <Link href={`/admin/membership/manage/edit/${membershipTemplate.id}`}>
+                                            <Button variant={'outline'} size={'xs'}>
+                                                <Pencil1Icon/>
+                                            </Button>
+                                        </Link>
+                                    </TableCell>
+                                </TableRow>
+                            ))
+                        }
                     </TableBody>
                 </Table>
             </div>
