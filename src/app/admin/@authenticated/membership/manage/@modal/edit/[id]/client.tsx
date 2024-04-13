@@ -20,8 +20,10 @@ export function AdminMembershipEditPageClient({
     toast({
       title: "Success",
       description: "Membership Template updated",
+      variant: "success",
     });
     router.replace("/admin/membership/manage");
+    router.refresh();
   };
 
   return (

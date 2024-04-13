@@ -1,7 +1,6 @@
 import { Modal } from "@/components/molecules/modal";
-import { AdminMembershipCRUDForm } from "@/app/admin/@authenticated/membership/manage/form";
-import { CRUDFormIntent } from "@/modules/crudForm/types";
 import { db } from "@/services/db";
+import { AdminMembershipEditModalClient } from "@/app/admin/@authenticated/membership/manage/@modal/(.)edit/[id]/client";
 
 const getData = (id: string) => {
   return db.membershipTemplate.findUnique({
@@ -10,15 +9,21 @@ const getData = (id: string) => {
     },
   });
 };
-export default async function AdminMembershipModalEditPage({ params }) {
+
+interface AdminMembershipEditPageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default async function AdminMembershipModalEditPage({
+  params,
+}: AdminMembershipEditPageProps) {
   const membershipTemplate = await getData(params.id);
 
   return (
     <Modal>
-      <AdminMembershipCRUDForm
-        intent={CRUDFormIntent.Edit}
-        previousValues={membershipTemplate}
-      />
+      <AdminMembershipEditModalClient previousValues={membershipTemplate!} />
     </Modal>
   );
 }

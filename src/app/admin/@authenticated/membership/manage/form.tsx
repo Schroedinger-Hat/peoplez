@@ -29,7 +29,7 @@ import {
 } from "@/components/ui/select";
 import { CRUDFormIntent } from "@/modules/crudForm/types";
 import { editMembershipTemplate } from "@/app/actions/editMembershipTemplate";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const formSchema = z.object({
   id: z.string().optional(),
@@ -63,6 +63,8 @@ export function AdminMembershipCRUDForm({
       : editMembershipTemplate,
     InitialServerActionState,
   );
+  const [onSuccessFired, setOnSuccessFired] = useState<boolean>(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues:
       intent === CRUDFormIntent.Create
@@ -78,14 +80,16 @@ export function AdminMembershipCRUDForm({
   useEffect(() => {
     if (
       membershipTemplateState.status === ServerActionStatus.Success &&
-      onSuccess
+      onSuccess &&
+      !onSuccessFired
     ) {
       onSuccess(membershipTemplateState);
+      setOnSuccessFired(true);
     }
-  }, [membershipTemplateState, onSuccess]);
+  }, [membershipTemplateState, onSuccess, onSuccessFired]);
 
   return (
-    <form action={form.handleSubmit(membershipTemplateAction)}>
+    <form action={form.handleSubmit(membershipTemplateAction) as any}>
       <Form {...form}>
         {CRUDFormIntent.Edit && (
           <FormField

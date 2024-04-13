@@ -5,7 +5,7 @@ import { CRUDFormIntent } from "@/modules/crudForm/types";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 
-export function AdminMembershipCreatePageClient() {
+export function AdminMembershipCreateModalClient() {
   const { toast } = useToast();
   const router = useRouter();
 
@@ -15,7 +15,7 @@ export function AdminMembershipCreatePageClient() {
       description: "Membership Template created",
       variant: "success",
     });
-    router.replace("/admin/membership/manage");
+    router.back();
     router.refresh();
   };
 
