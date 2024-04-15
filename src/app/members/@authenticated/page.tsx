@@ -1,8 +1,8 @@
 import {
-  MembershipCard,
+  MembershipTemplateCard,
   PricePeriod,
   PriceUnit,
-} from "@/components/molecules/membershipCard";
+} from "@/components/molecules/membershipTemplateCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getServerAuthSession } from "@/server/auth";
 
@@ -24,7 +24,7 @@ export default async function MembershipPortalHomePage() {
           partecipate in the association governance
         </p>
 
-        <MembershipCard
+        <MembershipTemplateCard
           showPrice={false}
           title={"SH 2024 Membership"}
           features={[
