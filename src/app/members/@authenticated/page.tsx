@@ -1,13 +1,26 @@
-import {
-  MembershipTemplateCard,
-  PricePeriod,
-  PriceUnit,
-} from "@/components/molecules/membershipTemplateCard";
+import { MembershipTemplateCard } from "@/components/molecules/membershipTemplateCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getServerAuthSession } from "@/server/auth";
+import { MembershipStatus, PricePeriod, PriceUnit } from "@prisma/client";
+import { db } from "@/services/db";
+
+function getData(userId) {
+  return db.membership.findFirst({
+    where: {
+      status: {
+        not: MembershipStatus.PENDING,
+      },
+      userId: userId,
+    },
+    include: {
+      membershipTemplate: true,
+    },
+  });
+}
 
 export default async function MembershipPortalHomePage() {
   const session = await getServerAuthSession();
+  const membership = await getData(session?.user.id!);
 
   return (
     <>
@@ -24,24 +37,19 @@ export default async function MembershipPortalHomePage() {
           partecipate in the association governance
         </p>
 
-        <MembershipTemplateCard
-          showPrice={false}
-          title={"SH 2024 Membership"}
-          features={[
-            "Be part of the community",
-            "Early-access to event tickets and contents",
-            "Dedicated 5€ discount on all shop orders",
-            "Exclusive members meetups and dinners",
-          ]}
-          price={{
-            period: PricePeriod.Yearly,
-            unit: PriceUnit.Eur,
-            value: 2400,
-          }}
-          description={
-            "Support groundbreaking open source initiatives and join us in our mission to create an international community of open source lovers."
-          }
-        />
+        {membership && (
+          <MembershipTemplateCard
+            showPrice={false}
+            title={membership.membershipTemplate.title}
+            features={membership.membershipTemplate.features}
+            price={{
+              period: membership.membershipTemplate.pricePeriod,
+              unit: membership.membershipTemplate.priceUnit,
+              value: membership.membershipTemplate.priceAmount,
+            }}
+            description={membership.membershipTemplate.description}
+          />
+        )}
 
         <div className={"grid gap-4"}>
           <h3 className={"text-lg"}>Latest Announcements</h3>

@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
-import {PricePeriod, PriceUnit} from "@prisma/client";
+import { type PricePeriod, type PriceUnit } from "@prisma/client";
+import { cn } from "@/lib/utils";
 
 interface Price {
   value: number;
@@ -8,6 +9,7 @@ interface Price {
 }
 
 interface MembershipTemplateCardProps {
+  className?: string;
   showPrice?: boolean;
   title: string;
   features: string[];
@@ -16,6 +18,7 @@ interface MembershipTemplateCardProps {
 }
 
 export function MembershipTemplateCard({
+  className = "",
   title,
   features,
   description,
@@ -29,7 +32,7 @@ export function MembershipTemplateCard({
   });
 
   return (
-    <Card className={'w-[320px]'}>
+    <Card className={cn("w-[320px]", className)}>
       <CardContent className={"p-6"}>
         <div className="mb-4 flex items-start justify-between">
           <h4 className={"text-lg font-semibold"}>{title}</h4>
