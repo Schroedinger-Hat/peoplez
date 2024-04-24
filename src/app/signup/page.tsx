@@ -1,34 +1,34 @@
-"use client";
+"use client"
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@hookform/resolvers/zod"
 import {
   Elements,
   PaymentElement,
   useElements,
   useStripe,
-} from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import Image from "next/image";
-import Link from "next/link";
-import { type Dispatch, type SetStateAction, useState } from "react";
-import { useFormState } from "react-dom";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+} from "@stripe/react-stripe-js"
+import { loadStripe } from "@stripe/stripe-js"
+import Image from "next/image"
+import Link from "next/link"
+import { type Dispatch, type SetStateAction, useState } from "react"
+import { useFormState } from "react-dom"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
 
 import {
   createMembership,
   type FormProps,
-} from "@/app/actions/createMembership";
-import type { ServerActionState } from "@/app/actions/types";
-import { ServerActionStatus } from "@/app/actions/types";
+} from "@/app/actions/createMembership"
+import type { ServerActionState } from "@/app/actions/types"
+import { ServerActionStatus } from "@/app/actions/types"
 import {
   MembershipCard,
   PricePeriod,
   PriceUnit,
-} from "@/app/signup/components/membershipCard";
-import { StatefulButton } from "@/components/molecules/statefulButton";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+} from "@/app/signup/components/membershipCard"
+import { StatefulButton } from "@/components/molecules/statefulButton"
+import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   Form,
   FormControl,
@@ -36,9 +36,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import checkmark from "@/images/checkmark.svg";
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import checkmark from "@/images/checkmark.svg"
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -59,11 +59,11 @@ const formSchema = z.object({
   statuteApproval: z.boolean().refine((val) => val, {
     message: "Please read and accept the statute",
   }),
-});
+})
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
-);
+)
 
 export default function SignupPage() {
   const [createMembershipState, createMembershipAction] = useFormState(
@@ -72,7 +72,7 @@ export default function SignupPage() {
       payload: {},
       status: ServerActionStatus.Pending,
     },
-  );
+  )
 
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
@@ -83,24 +83,24 @@ export default function SignupPage() {
       statuteApproval: true,
     },
     resolver: zodResolver(formSchema),
-  });
+  })
 
   const handleForm = async (data: FormProps) => {
     if (createMembershipState.nextStep === "confirmPayment") {
     } else {
-      createMembershipAction(data);
+      createMembershipAction(data)
     }
-  };
-  const [step, setStep] = useState<number>(1);
+  }
+  const [step, setStep] = useState<number>(1)
 
   const validateStep1 = async (): Promise<void> => {
-    await form.trigger(["firstName", "lastName", "email"]);
-    setStep(2);
-  };
+    await form.trigger(["firstName", "lastName", "email"])
+    setStep(2)
+  }
   const validateStep2 = async (): Promise<void> => {
-    await form.trigger(["socialSecurityNumber", "statuteApproval"]);
-    setStep(3);
-  };
+    await form.trigger(["socialSecurityNumber", "statuteApproval"])
+    setStep(3)
+  }
 
   return (
     <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
@@ -335,30 +335,30 @@ export default function SignupPage() {
         </Form>
       </form>
     </div>
-  );
+  )
 }
 
 interface Step4Props {
-  state: ServerActionState;
-  setStep: Dispatch<SetStateAction<number>>;
+  state: ServerActionState
+  setStep: Dispatch<SetStateAction<number>>
 }
 
 function Step4({ state, setStep }: Step4Props) {
-  const stripe = useStripe();
-  const elements = useElements();
+  const stripe = useStripe()
+  const elements = useElements()
 
   const handlePaymentSubmit = async () => {
-    await elements?.submit();
+    await elements?.submit()
     const confirmPayment = await stripe?.confirmPayment({
       clientSecret: (state?.payload as any)?.clientSecret,
       elements: elements!,
       redirect: "if_required",
-    });
-    console.log(confirmPayment);
+    })
+    console.log(confirmPayment)
     if ((confirmPayment?.paymentIntent as any)?.status === "succeeded") {
-      setStep(5);
+      setStep(5)
     }
-  };
+  }
 
   return (
     <div className="flex flex-col duration-300 animate-in slide-in-from-right-12">
@@ -377,5 +377,5 @@ function Step4({ state, setStep }: Step4Props) {
         </div>
       </div>
     </div>
-  );
+  )
 }

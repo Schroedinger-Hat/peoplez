@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
 interface DebugInterface {
-  title?: string;
-  children: unknown;
+  title?: string
+  children: unknown
 }
 
 export function Debug({ title, children }: DebugInterface) {
@@ -25,5 +25,5 @@ export function Debug({ title, children }: DebugInterface) {
         {JSON.stringify(children, null, 4)}
       </pre>
     </div>
-  );
+  )
 }
