@@ -2,9 +2,9 @@ import {
   MembershipCard,
   PricePeriod,
   PriceUnit,
-} from "@/components/molecules/membershipCard";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getServerAuthSession } from "@/server/auth";
+} from "@/components/molecules/membershipCard"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { getServerAuthSession } from "@/server/auth"
 
 export default async function MembershipPortalHomePage() {
   const session = await getServerAuthSession()

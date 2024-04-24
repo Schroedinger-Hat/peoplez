@@ -1,13 +1,13 @@
-import { toPlainObject } from "lodash";
-import Link from "next/link";
+import { toPlainObject } from "lodash"
+import Link from "next/link"
 
-import { Debug } from "@/components/devtool/debug";
-import { Button } from "@/components/ui/button";
-import { getServerAuthSession } from "@/server/auth";
-import { env } from "@/env";
+import { Debug } from "@/components/devtool/debug"
+import { Button } from "@/components/ui/button"
+import { getServerAuthSession } from "@/server/auth"
+import { env } from "@/env"
 
 export async function DevPage() {
-  const session = await getServerAuthSession();
+  const session = await getServerAuthSession()
 
   return (
     <div className={"h-dvh bg-gray-200 p-4"}>

@@ -12,7 +12,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/ui/card"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,33 +20,33 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import logo from "@/images/logo.svg";
-import { hasRequiredRole } from "@/lib/permissions";
-import { usernameToInitials } from "@/lib/utils";
-import { getServerAuthSession } from "@/server/auth";
-import { Toaster } from "@/components/ui/toaster";
+} from "@/components/ui/dropdown-menu"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import logo from "@/images/logo.svg"
+import { hasRequiredRole } from "@/lib/permissions"
+import { usernameToInitials } from "@/lib/utils"
+import { getServerAuthSession } from "@/server/auth"
+import { Toaster } from "@/components/ui/toaster"
 
 interface LayoutInterface {
-  children: React.ReactNode;
-  authenticated: React.ReactNode;
-  unauthenticated: React.ReactNode;
+  children: React.ReactNode
+  authenticated: React.ReactNode
+  unauthenticated: React.ReactNode
 }
 
 export default async function Layout({
   authenticated,
   unauthenticated,
 }: LayoutInterface) {
-  const session = await getServerAuthSession();
-  const isLoggedIn = session !== null;
+  const session = await getServerAuthSession()
+  const isLoggedIn = session !== null
 
   if (!isLoggedIn) {
     return (
       <main className="flex h-screen items-center justify-center bg-zinc-900">
         {unauthenticated}
       </main>
-    );
+    )
   }
 
   if (!hasRequiredRole(UserRole.admin, session)) {

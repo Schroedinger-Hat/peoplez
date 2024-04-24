@@ -19,4 +19,4 @@ export enum ServerActionStatus {
 export const InitialServerActionState = {
   payload: {},
   status: ServerActionStatus.Pending,
-};
+}

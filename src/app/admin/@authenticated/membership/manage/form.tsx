@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
 import {
   Form,
   FormControl,
@@ -10,26 +10,26 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { StatefulButton } from "@/components/molecules/statefulButton";
-import { useFormState } from "react-dom";
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { StatefulButton } from "@/components/molecules/statefulButton"
+import { useFormState } from "react-dom"
 import {
   InitialServerActionState,
   ServerActionStatus,
-} from "@/app/actions/types";
-import { createMembershipTemplate } from "@/app/actions/createMembershipTemplate";
+} from "@/app/actions/types"
+import { createMembershipTemplate } from "@/app/actions/createMembershipTemplate"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { CRUDFormIntent } from "@/modules/crudForm/types";
-import { editMembershipTemplate } from "@/app/actions/editMembershipTemplate";
-import { useEffect, useState } from "react";
+} from "@/components/ui/select"
+import { CRUDFormIntent } from "@/modules/crudForm/types"
+import { editMembershipTemplate } from "@/app/actions/editMembershipTemplate"
+import { useEffect, useState } from "react"
 
 const formSchema = z.object({
   id: z.string().optional(),
@@ -44,12 +44,12 @@ const formSchema = z.object({
       new RegExp("^price_[0-9A-Za-z]+$"),
       "You need to provide a Stripe Product Price ID, format: price_xxxxx",
     ),
-});
+})
 
 interface FormProps {
-  intent: CRUDFormIntent;
-  previousValues?: any;
-  onSuccess?: any;
+  intent: CRUDFormIntent
+  previousValues?: any
+  onSuccess?: any
 }
 
 export function AdminMembershipCRUDForm({
@@ -62,8 +62,8 @@ export function AdminMembershipCRUDForm({
       ? createMembershipTemplate
       : editMembershipTemplate,
     InitialServerActionState,
-  );
-  const [onSuccessFired, setOnSuccessFired] = useState<boolean>(false);
+  )
+  const [onSuccessFired, setOnSuccessFired] = useState<boolean>(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues:
@@ -75,7 +75,7 @@ export function AdminMembershipCRUDForm({
             priceAmount: previousValues.priceAmount / 100,
           },
     resolver: zodResolver(formSchema),
-  });
+  })
 
   useEffect(() => {
     if (
@@ -83,10 +83,10 @@ export function AdminMembershipCRUDForm({
       onSuccess &&
       !onSuccessFired
     ) {
-      onSuccess(membershipTemplateState);
-      setOnSuccessFired(true);
+      onSuccess(membershipTemplateState)
+      setOnSuccessFired(true)
     }
-  }, [membershipTemplateState, onSuccess, onSuccessFired]);
+  }, [membershipTemplateState, onSuccess, onSuccessFired])
 
   return (
     <form action={form.handleSubmit(membershipTemplateAction) as any}>
@@ -207,5 +207,5 @@ export function AdminMembershipCRUDForm({
         </div>
       </Form>
     </form>
-  );
+  )
 }

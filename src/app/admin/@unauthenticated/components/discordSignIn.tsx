@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { signIn } from "next-auth/react";
-import { DiscordLogoIcon } from "@radix-ui/react-icons";
+import { signIn } from "next-auth/react"
+import { DiscordLogoIcon } from "@radix-ui/react-icons"
 
 export function DiscordSignIn() {
   return (
@@ -14,5 +14,5 @@ export function DiscordSignIn() {
       <DiscordLogoIcon className={"mr-2"} width={20} height={20} />
       <span className={"text-sm font-semibold"}>Sign in with Discord</span>
     </button>
-  );
+  )
 }
