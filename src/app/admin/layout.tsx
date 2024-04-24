@@ -1,11 +1,11 @@
-import { UserRole } from "@prisma/client";
-import Image from "next/image";
-import Link from "next/link";
+import { UserRole } from "@prisma/client"
+import Image from "next/image"
+import Link from "next/link"
 
-import { Logout } from "@/app/admin/@unauthenticated/components/logout";
-import { adminMenuTreeConfig } from "@/app/admin/const";
-import { LogoutButton } from "@/components/molecules/logoutButton";
-import { Button } from "@/components/ui/button";
+import { Logout } from "@/app/admin/@unauthenticated/components/logout"
+import { adminMenuTreeConfig } from "@/app/admin/const"
+import { LogoutButton } from "@/components/molecules/logoutButton"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardDescription,
@@ -70,7 +70,7 @@ export default async function Layout({
           </CardFooter>
         </Card>
       </main>
-    );
+    )
   }
 
   return (
@@ -159,5 +159,5 @@ export default async function Layout({
         {authenticated}
       </main>
     </div>
-  );
+  )
 }

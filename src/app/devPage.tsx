@@ -43,5 +43,5 @@ export async function DevPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }

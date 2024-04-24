@@ -1,19 +1,19 @@
-"use client";
+"use client"
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@hookform/resolvers/zod"
 import {
   Elements,
   PaymentElement,
   useElements,
   useStripe,
-} from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import Image from "next/image";
-import Link from "next/link";
-import { type Dispatch, type SetStateAction, useState } from "react";
-import { useFormState } from "react-dom";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+} from "@stripe/react-stripe-js"
+import { loadStripe } from "@stripe/stripe-js"
+import Image from "next/image"
+import Link from "next/link"
+import { type Dispatch, type SetStateAction, useState } from "react"
+import { useFormState } from "react-dom"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
 
 import {
   createMembership,
@@ -36,9 +36,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import checkmark from "@/images/checkmark.svg";
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import checkmark from "@/images/checkmark.svg"
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -381,5 +381,5 @@ function Step4({ state, setStep }: Step4Props) {
         </div>
       </div>
     </div>
-  );
+  )
 }

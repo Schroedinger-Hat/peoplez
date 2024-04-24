@@ -7,5 +7,5 @@ export default async function AdminMembershipPage() {
         <Paragraph>Table with all the active membership</Paragraph>
       </div>
     </>
-  );
+  )
 }
