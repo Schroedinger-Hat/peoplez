@@ -61,19 +61,19 @@ model Session {
 }
 
 model User {
-  id                String       @id @default(cuid())
-  name              String?
-  role              UserRole     @default(member)
-  email             String?      @unique
-  emailVerified     DateTime?
-  image             String?
-  stripeCustomerId  String?
-  accounts          Account[]
-  sessions          Session[]
-  memberships       Membership[]
+  id               String       @id @default(cuid())
+  name             String?
+  role             UserRole     @default(member)
+  email            String?      @unique
+  emailVerified    DateTime?
+  image            String?
+  stripeCustomerId String?
+  accounts         Account[]
+  sessions         Session[]
+  memberships      Membership[]
 }
 
-enum UserRole{
+enum UserRole {
   member
   admin
 }
@@ -88,6 +88,7 @@ model VerificationToken {
 
 enum MembershipStatus {
   PENDING
+  WAITING
   ACTIVE
   REJECTED
   UNSUBSCRIBED
