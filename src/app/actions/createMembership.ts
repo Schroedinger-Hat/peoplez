@@ -1,15 +1,12 @@
-"use server";
+"use server"
 
-import { MembershipStatus } from "@prisma/client";
+import { MembershipStatus } from "@prisma/client"
 
-import {
-  type ServerActionState,
-  ServerActionStatus,
-} from "@/app/actions/types";
-import { db } from "@/services/db";
-import { stripe } from "@/services/stripe";
+import { type ServerActionState, ServerActionStatus } from "@/app/actions/types"
+import { db } from "@/services/db"
+import { stripe } from "@/services/stripe"
 
-const MEMBERSHIP_PRICE_ID = "price_1P3HNlCXdJySzBrwlcoAQqS2";
+const MEMBERSHIP_PRICE_ID = "price_1P3HNlCXdJySzBrwlcoAQqS2"
 
 export interface FormProps {
   email: string;
@@ -24,7 +21,7 @@ export async function createMembership(
   data: FormProps,
 ): Promise<ServerActionState> {
   // Avoid double membership creation
-  if (prevState.nextStep === "providePayment") return prevState;
+  if (prevState.nextStep === "providePayment") return prevState
 
   // Fetch membershipTemplate
   const membershipTemplate = await db.membershipTemplate.findUnique({
@@ -38,7 +35,7 @@ export async function createMembership(
     where: {
       email: data.email,
     },
-  });
+  })
 
   // No User found, creates it
   if (!user) {
@@ -49,7 +46,7 @@ export async function createMembership(
         emailVerified: new Date(),
         name: `${data.firstName} ${data.lastName}`.trim(),
       },
-    });
+    })
   }
 
   // User is not linked to Stripe, creates it
@@ -58,13 +55,13 @@ export async function createMembership(
     const stripeCustomer = await stripe.customers.create({
       email: data.email,
       name: `${data.firstName} ${data.lastName}`.trim(),
-    });
+    })
 
-    user.stripeCustomerId = stripeCustomer.id;
+    user.stripeCustomerId = stripeCustomer.id
     await db.user.update({
       data: { stripeCustomerId: stripeCustomer.id },
       where: { id: user.id },
-    });
+    })
   }
 
   // Lookup for membership
@@ -75,7 +72,7 @@ export async function createMembership(
       },
       userId: user.id,
     },
-  });
+  })
 
   // Membership already exists, block creation
   if (membership) {
@@ -86,7 +83,7 @@ export async function createMembership(
         },
       ],
       status: ServerActionStatus.Error,
-    };
+    }
   }
 
   // Creates membership
@@ -97,7 +94,7 @@ export async function createMembership(
       userId: user.id,
       membershipTemplateId: membershipTemplate.id,
     },
-  });
+  })
 
   // Create Stripe subscription
   const stripeSubscription = await stripe.subscriptions.create({
@@ -112,14 +109,14 @@ export async function createMembership(
     payment_settings: {
       payment_method_types: ["card", "link", "paypal", "sepa_debit"],
     },
-  });
+  })
 
   // Update membership
-  membership.stripeSubscriptionId = stripeSubscription.id;
+  membership.stripeSubscriptionId = stripeSubscription.id
   await db.membership.update({
     data: { stripeSubscriptionId: stripeSubscription.id },
     where: { id: membership.id },
-  });
+  })
 
   // Return secret to client to finalize payment
   return {
@@ -130,5 +127,5 @@ export async function createMembership(
       membershipId: membership.id,
     },
     status: ServerActionStatus.Success,
-  };
+  }
 }

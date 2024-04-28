@@ -3,9 +3,9 @@ import { type PricePeriod, type PriceUnit } from "@prisma/client";
 import { cn } from "@/lib/utils";
 
 interface Price {
-  value: number;
-  period: PricePeriod;
-  unit: PriceUnit;
+  value: number
+  period: PricePeriod
+  unit: PriceUnit
 }
 
 interface MembershipTemplateCardProps {
@@ -29,7 +29,7 @@ export function MembershipTemplateCard({
     currency: price.unit,
     minimumFractionDigits: 0,
     style: "currency",
-  });
+  })
 
   return (
     <Card className={cn("w-[320px]", className)}>
@@ -57,5 +57,5 @@ export function MembershipTemplateCard({
         )}
       </CardContent>
     </Card>
-  );
+  )
 }

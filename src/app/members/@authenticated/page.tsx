@@ -84,5 +84,5 @@ export default async function MembershipPortalHomePage() {
         </div>
       </div>
     </>
-  );
+  )
 }
