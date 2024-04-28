@@ -1,6 +1,6 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { type PricePeriod, type PriceUnit } from "@prisma/client";
-import { cn } from "@/lib/utils";
+import { Card, CardContent } from "@/components/ui/card"
+import { type PricePeriod, type PriceUnit } from "@prisma/client"
+import { cn } from "@/lib/utils"
 
 interface Price {
   value: number
@@ -9,12 +9,12 @@ interface Price {
 }
 
 interface MembershipTemplateCardProps {
-  className?: string;
-  showPrice?: boolean;
-  title: string;
-  features: string[];
-  description: string | null;
-  price: Price;
+  className?: string
+  showPrice?: boolean
+  title: string
+  features: string[]
+  description: string | null
+  price: Price
 }
 
 export function MembershipTemplateCard({

@@ -9,11 +9,11 @@ import { stripe } from "@/services/stripe"
 const MEMBERSHIP_PRICE_ID = "price_1P3HNlCXdJySzBrwlcoAQqS2"
 
 export interface FormProps {
-  email: string;
-  firstName: string;
-  lastName: string;
-  socialSecurityNumber: string;
-  membershipTemplateId: string;
+  email: string
+  firstName: string
+  lastName: string
+  socialSecurityNumber: string
+  membershipTemplateId: string
 }
 
 export async function createMembership(
@@ -28,7 +28,7 @@ export async function createMembership(
     where: {
       id: data.membershipTemplateId,
     },
-  });
+  })
 
   // Check for user
   let user = await db.user.findFirst({

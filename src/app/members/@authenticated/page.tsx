@@ -1,8 +1,8 @@
-import { MembershipTemplateCard } from "@/components/molecules/membershipTemplateCard";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getServerAuthSession } from "@/server/auth";
-import { MembershipStatus, PricePeriod, PriceUnit } from "@prisma/client";
-import { db } from "@/services/db";
+import { MembershipTemplateCard } from "@/components/molecules/membershipTemplateCard"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { getServerAuthSession } from "@/server/auth"
+import { MembershipStatus, PricePeriod, PriceUnit } from "@prisma/client"
+import { db } from "@/services/db"
 
 function getData(userId) {
   return db.membership.findFirst({
@@ -15,12 +15,12 @@ function getData(userId) {
     include: {
       membershipTemplate: true,
     },
-  });
+  })
 }
 
 export default async function MembershipPortalHomePage() {
-  const session = await getServerAuthSession();
-  const membership = await getData(session?.user.id!);
+  const session = await getServerAuthSession()
+  const membership = await getData(session?.user.id!)
 
   return (
     <>

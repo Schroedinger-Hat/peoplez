@@ -1,5 +1,5 @@
-import SignupForm from "@/app/signup/form";
-import { db } from "@/services/db";
+import SignupForm from "@/app/signup/form"
+import { db } from "@/services/db"
 
 function getData() {
   return db.membershipTemplate.findMany({
@@ -8,15 +8,15 @@ function getData() {
         priceAmount: "asc",
       },
     ],
-  });
+  })
 }
 
 export default async function SignupPage() {
-  const membershipTemplates = await getData();
+  const membershipTemplates = await getData()
 
   return (
     <>
       <SignupForm membershipTemplates={membershipTemplates} />
     </>
-  );
+  )
 }
