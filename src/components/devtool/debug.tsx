@@ -21,7 +21,7 @@ export function Debug({ title, children }: DebugInterface) {
           {title}
         </span>
       )}
-      <pre className={"font-mono text-xs font-light text-green-500"}>
+      <pre className={"font-mono text-xs font-light leading-5 text-green-500"}>
         {JSON.stringify(children, null, 4)}
       </pre>
     </div>

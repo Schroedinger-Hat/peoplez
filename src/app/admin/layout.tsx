@@ -26,6 +26,7 @@ import logo from "@/images/logo.svg"
 import { hasRequiredRole } from "@/lib/permissions"
 import { usernameToInitials } from "@/lib/utils"
 import { getServerAuthSession } from "@/server/auth"
+import { Toaster } from "@/components/ui/toaster"
 
 interface LayoutInterface {
   children: React.ReactNode
@@ -74,6 +75,7 @@ export default async function Layout({
 
   return (
     <div className="flex min-h-screen w-full flex-col">
+      <Toaster />
       {/*Navigation*/}
       <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b bg-background px-4 md:px-6">
         <Link href="/admin">

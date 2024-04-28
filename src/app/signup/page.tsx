@@ -25,7 +25,7 @@ import {
   MembershipCard,
   PricePeriod,
   PriceUnit,
-} from "@/app/signup/components/membershipCard"
+} from "@/components/molecules/membershipCard"
 import { StatefulButton } from "@/components/molecules/statefulButton"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -80,7 +80,7 @@ export default function SignupPage() {
       firstName: "",
       lastName: "",
       socialSecurityNumber: "",
-      statuteApproval: true,
+      statuteApproval: false,
     },
     resolver: zodResolver(formSchema),
   })
@@ -94,12 +94,15 @@ export default function SignupPage() {
   const [step, setStep] = useState<number>(1)
 
   const validateStep1 = async (): Promise<void> => {
-    await form.trigger(["firstName", "lastName", "email"])
-    setStep(2)
+    const stepIsValid = await form.trigger(["firstName", "lastName", "email"])
+    if (stepIsValid) setStep(2)
   }
   const validateStep2 = async (): Promise<void> => {
-    await form.trigger(["socialSecurityNumber", "statuteApproval"])
-    setStep(3)
+    const stepIsValid = await form.trigger([
+      "socialSecurityNumber",
+      "statuteApproval",
+    ])
+    if (stepIsValid) setStep(3)
   }
 
   return (
@@ -178,6 +181,7 @@ export default function SignupPage() {
                     </div>
                   </div>
                 </div>
+
                 <p className={"mt-4 text-center text-xs text-gray-600"}>
                   By clicking Continue, you agree to our
                   <br />

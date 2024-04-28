@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Debug } from "@/components/devtool/debug"
 import { Button } from "@/components/ui/button"
 import { getServerAuthSession } from "@/server/auth"
+import { env } from "@/env"
 
 export async function DevPage() {
   const session = await getServerAuthSession()
@@ -38,7 +39,7 @@ export async function DevPage() {
         </div>
 
         <div className={"grid overflow-auto"}>
-          <Debug title={"process.env"}>{toPlainObject(process.env)}</Debug>
+          <Debug title={"env"}>{toPlainObject(env)}</Debug>
         </div>
       </div>
     </div>
