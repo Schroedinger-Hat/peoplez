@@ -1,20 +1,17 @@
 import {PrismaClient} from '@prisma/client'
 
-import {membershipTemplates} from "./membershipTemplates";
-import {users} from "./users";
+import {membershipTemplates} from "./models/membershipTemplates";
+import {users} from "./models/users";
 
 const prisma = new PrismaClient()
 
-async function main() {
-    await prisma.user.createMany({
-        data: users,
-        skipDuplicates: true
-    })
+function seedModel(model: any, data: object[]) {
+    return model.createMany({data, skipDuplicates: true})
+}
 
-    await prisma.membershipTemplate.createMany({
-        data: membershipTemplates,
-        skipDuplicates: true
-    })
+async function main() {
+    await seedModel(prisma.user, users)
+    await seedModel(prisma.membershipTemplate, membershipTemplates)
 }
 
 main()
