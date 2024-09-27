@@ -1,4 +1,4 @@
-import { Paragraph } from "@/components/ui/typography";
+import { Paragraph } from "@/components/ui/typography"
 
 export default async function AdminMembershipPage() {
   return (
@@ -7,5 +7,5 @@ export default async function AdminMembershipPage() {
         <Paragraph>Table memberships that need reviews</Paragraph>
       </div>
     </>
-  );
+  )
 }

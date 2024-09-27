@@ -44,7 +44,7 @@ export async function createMembership(
   // User is not linked to Stripe, creates it
   if (!user.stripeCustomerId) {
     // Create customer to Stripe and link it to user
-    const stripeCustomer = await stripe.customers.create({
+    const stripeCustomer = await stripe().customers.create({
       email: data.email,
       name: `${data.firstName} ${data.lastName}`.trim(),
     })
@@ -88,7 +88,7 @@ export async function createMembership(
   })
 
   // Create Stripe subscription
-  const stripeSubscription = await stripe.subscriptions.create({
+  const stripeSubscription = await stripe().subscriptions.create({
     customer: user.stripeCustomerId,
     expand: ["latest_invoice.payment_intent"],
     items: [

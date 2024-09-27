@@ -1,14 +1,14 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from "next/image"
+import Link from "next/link"
 
-import { buttonVariants } from "@/components/ui/button";
-import logoWhite from "@/images/logo-white.svg";
-import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button"
+import logoWhite from "@/images/logo-white.svg"
+import { cn } from "@/lib/utils"
 
 export default function SignUpLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <div className="h-full">
@@ -56,5 +56,5 @@ export default function SignUpLayout({
         <div className="lg:p-8">{children}</div>
       </div>
     </div>
-  );
+  )
 }

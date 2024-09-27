@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { signOut } from "next-auth/react";
+import { signOut } from "next-auth/react"
 
 // TODO: Add confirm modal before triggering logout
 export function LogoutButton() {
@@ -8,5 +8,5 @@ export function LogoutButton() {
     <span onClick={() => signOut()} className={"cursor-pointer"}>
       Logout
     </span>
-  );
+  )
 }

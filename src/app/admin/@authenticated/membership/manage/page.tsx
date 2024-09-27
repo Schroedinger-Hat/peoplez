@@ -5,12 +5,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { db } from "@/services/db";
-import { type MembershipTemplate } from "@prisma/client";
-import { Button } from "@/components/ui/button";
-import { Pencil1Icon } from "@radix-ui/react-icons";
-import Link from "next/link";
+} from "@/components/ui/table"
+import { db } from "@/services/db"
+import { type MembershipTemplate } from "@prisma/client"
+import { Button } from "@/components/ui/button"
+import { Pencil1Icon } from "@radix-ui/react-icons"
+import Link from "next/link"
 
 async function getData() {
   return db.membershipTemplate.findMany({
@@ -19,11 +19,11 @@ async function getData() {
         id: "desc",
       },
     ],
-  });
+  })
 }
 
 export default async function AdminMembershipPage() {
-  const membershipTemplates = await getData();
+  const membershipTemplates = await getData()
 
   return (
     <>
@@ -69,7 +69,7 @@ export default async function AdminMembershipPage() {
         </Table>
       </div>
     </>
-  );
+  )
 }
 
 function FormatPrice({ element }: any) {
@@ -77,7 +77,7 @@ function FormatPrice({ element }: any) {
     currency: element.priceUnit,
     minimumFractionDigits: 2,
     style: "currency",
-  });
+  })
 
-  return <span>{moneyFormatter.format(element.priceAmount / 100)}</span>;
+  return <span>{moneyFormatter.format(element.priceAmount / 100)}</span>
 }

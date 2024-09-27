@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { signOut } from "next-auth/react";
+import { signOut } from "next-auth/react"
 
 export function Logout() {
   return (
@@ -12,5 +12,5 @@ export function Logout() {
     >
       <span className={"text-sm font-semibold"}>Logout</span>
     </button>
-  );
+  )
 }

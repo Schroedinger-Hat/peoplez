@@ -1,12 +1,12 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from "next/image"
+import Link from "next/link"
 
-import logo from "@/images/logo-white.svg";
+import logo from "@/images/logo-white.svg"
 
 export default function LegalLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <>
@@ -28,5 +28,5 @@ export default function LegalLayout({
       <div className="container py-16 sm:px-8 md:px-8 lg:w-3/4">{children}</div>
       <footer></footer>
     </>
-  );
+  )
 }

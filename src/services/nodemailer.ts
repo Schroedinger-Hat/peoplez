@@ -1,6 +1,6 @@
-import nodemailer from "nodemailer";
+import nodemailer from "nodemailer"
 
-import { env } from "@/env";
+import { env } from "@/env"
 
 const transporter = nodemailer.createTransport({
   auth: {
@@ -10,6 +10,6 @@ const transporter = nodemailer.createTransport({
   host: env.EMAIL_SERVER_HOST,
   port: env.EMAIL_SERVER_PORT,
   secure: true,
-});
+})
 
-export { transporter };
+export { transporter }

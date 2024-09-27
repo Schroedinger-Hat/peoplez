@@ -5,5 +5,5 @@ export default async function AdminUsersPage() {
         <h1 className="text-3xl font-semibold">Advanced</h1>
       </div>
     </>
-  );
+  )
 }

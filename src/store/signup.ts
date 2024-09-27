@@ -1,10 +1,10 @@
-import { create } from "zustand";
+import { create } from "zustand"
 
 interface SignUpState {
-  name: string;
-  surname: string;
-  email: string;
-  socialSecurityNumber: string;
+  name: string
+  surname: string
+  email: string
+  socialSecurityNumber: string
 }
 
 export const useSignUpStore = create<SignUpState>((set) => ({
@@ -17,4 +17,4 @@ export const useSignUpStore = create<SignUpState>((set) => ({
   setSurname: (surname: string) => set(() => ({ surname: surname })),
   socialSecurityNumber: "",
   surname: "",
-}));
+}))

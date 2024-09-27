@@ -1,16 +1,16 @@
-"use server";
+"use server"
 
-import { MembershipStatus } from "@prisma/client";
+import { MembershipStatus } from "@prisma/client"
 
-import { db } from "@/services/db";
+import { db } from "@/services/db"
 
 export interface ServerActionState {
-  checked: boolean;
-  valid: boolean;
-  email?: string;
+  checked: boolean
+  valid: boolean
+  email?: string
 }
 interface FormProps {
-  email: string;
+  email: string
 }
 export async function validateUserEmail(
   prevState: ServerActionState,
@@ -20,14 +20,14 @@ export async function validateUserEmail(
     where: {
       email: data.email,
     },
-  });
+  })
 
   // No user means that is not valid
   if (!user)
     return {
       checked: true,
       valid: false,
-    };
+    }
 
   // User without membership means that is not valid
   const membership = await db.membership.findFirst({
@@ -37,16 +37,16 @@ export async function validateUserEmail(
       },
       userId: user.id,
     },
-  });
+  })
   if (!membership)
     return {
       checked: true,
       valid: false,
-    };
+    }
 
   return {
     checked: true,
     email: data.email,
     valid: true,
-  };
+  }
 }

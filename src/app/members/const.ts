@@ -14,4 +14,4 @@ export const membersMenuTreeConfig = [
     label: "Announcements",
     url: "/members/announcements",
   },
-];
+]

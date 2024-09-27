@@ -1,11 +1,11 @@
-import { DiscordSignIn } from "@/app/admin/@unauthenticated/components/discordSignIn";
+import { DiscordSignIn } from "@/app/admin/@unauthenticated/components/discordSignIn"
 import {
   Card,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/ui/card"
 
 export default function AdminLogin() {
   return (
@@ -20,5 +20,5 @@ export default function AdminLogin() {
         <DiscordSignIn />
       </CardFooter>
     </Card>
-  );
+  )
 }

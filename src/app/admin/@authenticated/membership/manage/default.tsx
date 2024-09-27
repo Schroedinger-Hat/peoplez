@@ -1,3 +1,3 @@
 export default function AdminMembershipModalDefault() {
-  return null;
+  return null
 }
