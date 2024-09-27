@@ -11,6 +11,7 @@ import EmailProvider from "next-auth/providers/email"
 import { env } from "@/env"
 import { inDevEnvironment } from "@/lib/envs"
 import { db } from "@/services/db"
+import type { Provider } from "next-auth/src/providers"
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -50,14 +51,14 @@ const emailProvider = EmailProvider({
   },
 })
 
-const providers = [
+const providers: Provider[] = [
   {
     ...emailProvider,
     async sendVerificationRequest(params) {
       if (inDevEnvironment) {
         console.log("\nRequested a magic link, signin with url:", params.url)
       } else {
-        return emailProvider.sendVerificationRequest(params)
+        return emailProvider.sendVerificationRequest(params as undefined)
       }
     },
   },

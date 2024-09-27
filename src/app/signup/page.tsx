@@ -62,7 +62,7 @@ const formSchema = z.object({
 })
 
 const stripePromise = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-    ? loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+  ? loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
   : null
 
 export default function SignupPage() {
@@ -307,8 +307,9 @@ export default function SignupPage() {
 
           {/*Payment*/}
           {createMembershipState.nextStep === "providePayment" &&
-            step !== 5 && (
-                  stripePromise && <Elements
+            step !== 5 &&
+            stripePromise && (
+              <Elements
                 stripe={stripePromise}
                 options={{
                   clientSecret: (createMembershipState?.payload as any)
@@ -317,17 +318,6 @@ export default function SignupPage() {
               >
                 <Step4 state={createMembershipState} setStep={setStep} />
               </Elements>
-                  !stripePromise && (
-                <div className="grid grid-cols-1 justify-items-center">
-                    <p className={"text-md font-semibold"}>
-                        Payment is not available at the moment
-                    </p>
-                    <p className={"text-md text-gray-800"}>
-                        Please try again later or contact support
-                    </p>
-                </div>
-  )
-            )
             )}
 
           {/*Success*/}

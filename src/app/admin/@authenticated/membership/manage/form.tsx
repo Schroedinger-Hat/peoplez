@@ -71,7 +71,7 @@ export function AdminMembershipCRUDForm({
         ? {}
         : {
             ...previousValues,
-            features: previousValues?.features.join(","),
+            features: previousValues?.features?.join(",") || "",
             priceAmount: previousValues.priceAmount / 100,
           },
     resolver: zodResolver(formSchema),

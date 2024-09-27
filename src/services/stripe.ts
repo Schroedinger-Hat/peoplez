@@ -2,7 +2,7 @@ import Stripe from "stripe"
 
 import { env } from "@/env"
 
-let _stripe
+let _stripe: Stripe
 
 const stripe = () => {
   if (!_stripe)
