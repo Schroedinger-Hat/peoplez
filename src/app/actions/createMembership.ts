@@ -4,9 +4,9 @@ import { MembershipStatus } from "@prisma/client"
 
 import { type ServerActionState, ServerActionStatus } from "@/app/actions/types"
 import { db } from "@/services/db"
-import { stripe } from "@/services/stripe"
+import { canUseStripe, stripe } from "@/services/stripe"
 
-const MEMBERSHIP_PRICE_ID = "price_1P3HNlCXdJySzBrwlcoAQqS2"
+const MEMBERSHIP_PRICE_ID = "price_1P3HNlCXdJySzBrwlcoAQqS2" // TODO: Remove the hardcoded price ID
 
 export interface FormProps {
   email: string
@@ -19,6 +19,16 @@ export async function createMembership(
   prevState: ServerActionState,
   data: FormProps,
 ): Promise<ServerActionState> {
+  if (!canUseStripe()) {
+    return {
+      errors: [
+        {
+          message: "Stripe is not configured",
+        },
+      ],
+      status: ServerActionStatus.Error,
+    }
+  }
   // Avoid double membership creation
   if (prevState.nextStep === "providePayment") return prevState
 
@@ -114,7 +124,8 @@ export async function createMembership(
     nextStep: "providePayment",
     payload: {
       // eslint-disable-next-line
-            clientSecret: (stripeSubscription?.latest_invoice as any)?.payment_intent?.client_secret,
+      clientSecret: (stripeSubscription?.latest_invoice as any)?.payment_intent
+        ?.client_secret,
       membershipId: membership.id,
     },
     status: ServerActionStatus.Success,
