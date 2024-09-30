@@ -14,12 +14,14 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_PASSWORD: postgres
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+          POSTGRES_USER: ci
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: db
+          POSTGRESQL_FSYNC: "off"
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - name: Checkout
@@ -70,22 +72,20 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} run lint
         env:
           SKIP_ENV_VALIDATION: true
-          DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
+          DATABASE_URL: postgres://ci:test@postgres:5432/db
 
       - name: Lint Prisma
         run: ${{ steps.detect-package-manager.outputs.manager }} run lint:prisma
         env:
-          SKIP_ENV_VALIDATION: true
-          DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
+          DATABASE_URL: postgres://ci:test@postgres:5432/db
 
       - name: Can run Migrations
         run: ${{ steps.detect-package-manager.outputs.manager }} run db:push
         env:
-          SKIP_ENV_VALIDATION: true
-          DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
+          DATABASE_URL: postgres://ci:test@postgres:5432/db
 
       - name: Build
         run: ${{ steps.detect-package-manager.outputs.manager }} run build
         env:
           SKIP_ENV_VALIDATION: true
-          DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
+          DATABASE_URL: postgres://ci:test@postgres:5432/db
