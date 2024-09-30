@@ -70,22 +70,22 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} run lint
         env:
           SKIP_ENV_VALIDATION: true
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+          DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
 
       - name: Lint Prisma
         run: ${{ steps.detect-package-manager.outputs.manager }} run lint:prisma
         env:
           SKIP_ENV_VALIDATION: true
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+          DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
 
       - name: Can run Migrations
         run: ${{ steps.detect-package-manager.outputs.manager }} run db:push
         env:
           SKIP_ENV_VALIDATION: true
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+          DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
 
       - name: Build
         run: ${{ steps.detect-package-manager.outputs.manager }} run build
         env:
           SKIP_ENV_VALIDATION: true
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+          DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
