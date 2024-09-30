@@ -1,7 +1,7 @@
 import { MembershipTemplateCard } from "@/components/molecules/membershipTemplateCard"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getServerAuthSession } from "@/server/auth"
-import { MembershipStatus, PricePeriod, PriceUnit } from "@prisma/client"
+import { MembershipStatus } from "@prisma/client"
 import { db } from "@/services/db"
 
 function getData(userId) {
@@ -20,7 +20,7 @@ function getData(userId) {
 
 export default async function MembershipPortalHomePage() {
   const session = await getServerAuthSession()
-  const membership = await getData(session?.user.id!)
+  const membership = await getData(session?.user.id)
 
   return (
     <>

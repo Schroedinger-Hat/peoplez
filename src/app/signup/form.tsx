@@ -37,7 +37,6 @@ import { Input } from "@/components/ui/input"
 import checkmark from "@/images/checkmark.svg"
 import { type MembershipTemplate } from "@prisma/client"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
-import { Debug } from "@/components/devtool/debug"
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -284,38 +283,41 @@ export default function SignupForm({ membershipTemplates }: SignupFormProps) {
                       <Input type={"hidden"} {...field} />
                       <ScrollArea className="-ml-[58px] w-[436px] p-2">
                         <div className="mb-2 flex w-max space-x-4">
-                          {membershipTemplates.map((membershipTemplate) => (
-                            <div
-                              onClick={() => {
-                                form.setValue(
-                                  "membershipTemplateId",
-                                  membershipTemplate.id,
-                                  {
-                                    shouldTouch: true,
-                                    shouldDirty: true,
-                                  },
-                                )
-                              }}
-                            >
-                              <MembershipTemplateCard
-                                className={
-                                  form.getValues("membershipTemplateId") ===
-                                  membershipTemplate.id
-                                    ? "cursor-pointer border-blue-500"
-                                    : "cursor-pointer"
-                                }
-                                key={membershipTemplate.id}
-                                title={membershipTemplate.title}
-                                features={membershipTemplate.features}
-                                price={{
-                                  period: membershipTemplate.pricePeriod,
-                                  unit: membershipTemplate.priceUnit,
-                                  value: membershipTemplate.priceAmount,
+                          {membershipTemplates.map(
+                            (membershipTemplate, index) => (
+                              <div
+                                key={index}
+                                onClick={() => {
+                                  form.setValue(
+                                    "membershipTemplateId",
+                                    membershipTemplate.id,
+                                    {
+                                      shouldTouch: true,
+                                      shouldDirty: true,
+                                    },
+                                  )
                                 }}
-                                description={membershipTemplate.description}
-                              />
-                            </div>
-                          ))}
+                              >
+                                <MembershipTemplateCard
+                                  className={
+                                    form.getValues("membershipTemplateId") ===
+                                    membershipTemplate.id
+                                      ? "cursor-pointer border-blue-500"
+                                      : "cursor-pointer"
+                                  }
+                                  key={membershipTemplate.id}
+                                  title={membershipTemplate.title}
+                                  features={membershipTemplate.features}
+                                  price={{
+                                    period: membershipTemplate.pricePeriod,
+                                    unit: membershipTemplate.priceUnit,
+                                    value: membershipTemplate.priceAmount,
+                                  }}
+                                  description={membershipTemplate.description}
+                                />
+                              </div>
+                            ),
+                          )}
                         </div>
                         <ScrollBar orientation="horizontal" />
                       </ScrollArea>
