@@ -87,5 +87,6 @@ jobs:
       - name: Build
         run: ${{ steps.detect-package-manager.outputs.manager }} run build -d
         env:
-          SKIP_ENV_VALIDATION: true
           DATABASE_URL: postgres://test:test@localhost:5432/db
+          NEXTAUTH_SECRET: secret
+          NEXTAUTH_URL: http://localhost:3000
