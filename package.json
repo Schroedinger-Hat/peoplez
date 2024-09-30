@@ -13,7 +13,8 @@
     "dev:email": "npx dotenv-run-script dev:email-noenv",
     "dev:email-noenv": "email dev --dir src/emails",
     "postinstall": "prisma generate",
-    "lint": "next lint && prisma validate",
+    "lint": "next lint",
+    "lint:prisma": "prisma validate",
     "lint:fix": "next lint --fix && prisma format",
     "start": "next start",
     "ragequit": "rm -rf .next && npm run db:push && npm run dev"
