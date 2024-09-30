@@ -1,4 +1,4 @@
-name: Check build
+name: Checks
 
 on:
   pull_request:
@@ -9,11 +9,24 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+
       - name: Detect package manager
         id: detect-package-manager
         run: |
@@ -31,12 +44,14 @@ jobs:
             echo "Unable to determine package manager" >&2
             exit 1
           fi
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           # NVM Codename for Node 20 LTS
           node-version: "lts/iron"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
+
       - name: Restore cache
         uses: actions/cache@v3
         with:
@@ -47,7 +62,16 @@ jobs:
           # If source files changed but packages didn't, rebuild from a prior cache.
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
+
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
-      - name: Check build
+
+      - name: Lint
+        run: ${{ steps.detect-package-manager.outputs.manager }} run lint
+        env:
+          SKIP_ENV_VALIDATION: true
+
+      - name: Build
         run: ${{ steps.detect-package-manager.outputs.manager }} run build
+        env:
+          SKIP_ENV_VALIDATION: true
