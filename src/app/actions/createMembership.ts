@@ -13,6 +13,7 @@ export interface FormProps {
   firstName: string
   lastName: string
   socialSecurityNumber: string
+  membershipTemplateId: string
 }
 
 export async function createMembership(
@@ -31,6 +32,13 @@ export async function createMembership(
   }
   // Avoid double membership creation
   if (prevState.nextStep === "providePayment") return prevState
+
+  // Fetch membershipTemplate
+  const membershipTemplate = await db.membershipTemplate.findUnique({
+    where: {
+      id: data.membershipTemplateId,
+    },
+  })
 
   // Check for user
   let user = await db.user.findFirst({
@@ -94,6 +102,7 @@ export async function createMembership(
       socialSecurityNumber: data.socialSecurityNumber,
       status: MembershipStatus.PENDING,
       userId: user.id,
+      membershipTemplateId: membershipTemplate.id,
     },
   })
 

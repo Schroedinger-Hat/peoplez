@@ -67,7 +67,7 @@ model User {
   email            String?      @unique
   emailVerified    DateTime?
   image            String?
-  stripeCustomerId String?
+  stripeCustomerId String?      @unique
   accounts         Account[]
   sessions         Session[]
   memberships      Membership[]
@@ -96,29 +96,42 @@ enum MembershipStatus {
 
 model Membership {
   id                   String           @id @default(cuid())
-  userId               String
   socialSecurityNumber String
   internalRef          String?          @unique // @db.Text
   status               MembershipStatus @default(PENDING)
-  createdAt            DateTime         @default(now())
-  updatedAt            DateTime         @updatedAt
   lastPaymentAt        DateTime?
   expiresAt            DateTime?
   stripeSubscriptionId String?          @unique // @db.Text
-  user                 User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Associations IDs
+  userId               String
+  membershipTemplateId String
+
+  // Associations
+  user               User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  membershipTemplate MembershipTemplate @relation(fields: [membershipTemplateId], references: [id], onDelete: Cascade)
 }
 
 model MembershipTemplate {
-  id              String        @id @default(cuid())
-  title           String
-  description     String?
-  features        String[]
-  priceAmount     Int
-  pricePeriod     PricePeriod   @default(Yearly)
-  priceUnit       PriceUnit     @default(EUR)
-  stripePriceId   String        @unique
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+  id            String      @id @default(cuid())
+  title         String
+  description   String?
+  features      String[]
+  priceAmount   Int
+  pricePeriod   PricePeriod @default(Yearly)
+  priceUnit     PriceUnit   @default(EUR)
+  stripePriceId String      @unique
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Associations
+  membership Membership[]
 }
 
 enum PricePeriod {

@@ -1,4 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
+import { type PricePeriod, type PriceUnit } from "@prisma/client"
+import { cn } from "@/lib/utils"
 
 interface Price {
   value: number
@@ -6,31 +8,23 @@ interface Price {
   unit: PriceUnit
 }
 
-export enum PriceUnit {
-  Eur = "EUR",
-  Usd = "USD",
-}
-
-export enum PricePeriod {
-  Monthly = "month",
-  Yearly = "year",
-}
-
-interface Membership {
+interface MembershipTemplateCardProps {
+  className?: string
   showPrice?: boolean
   title: string
   features: string[]
-  description?: string
+  description: string | null
   price: Price
 }
 
-export function MembershipCard({
+export function MembershipTemplateCard({
+  className = "",
   title,
   features,
   description,
   price,
   showPrice = true,
-}: Membership) {
+}: MembershipTemplateCardProps) {
   const moneyFormatter = new Intl.NumberFormat("en-US", {
     currency: price.unit,
     minimumFractionDigits: 0,
@@ -38,7 +32,7 @@ export function MembershipCard({
   })
 
   return (
-    <Card>
+    <Card className={cn("w-[320px]", className)}>
       <CardContent className={"p-6"}>
         <div className="mb-4 flex items-start justify-between">
           <h4 className={"text-lg font-semibold"}>{title}</h4>
