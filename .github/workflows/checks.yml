@@ -78,6 +78,12 @@ jobs:
           SKIP_ENV_VALIDATION: true
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
 
+      - name: Can run Migrations
+        run: ${{ steps.detect-package-manager.outputs.manager }} run db:push
+        env:
+          SKIP_ENV_VALIDATION: true
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+
       - name: Build
         run: ${{ steps.detect-package-manager.outputs.manager }} run build
         env:

@@ -4,7 +4,7 @@ import { getServerAuthSession } from "@/server/auth"
 import { MembershipStatus } from "@prisma/client"
 import { db } from "@/services/db"
 
-function getData(userId) {
+function getData(userId: string | undefined) {
   return db.membership.findFirst({
     where: {
       status: {

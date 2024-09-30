@@ -40,6 +40,18 @@ export async function createMembership(
     },
   })
 
+  // No template, return error
+  if (!membershipTemplate) {
+    return {
+      errors: [
+        {
+          message: "Membership template not found",
+        },
+      ],
+      status: ServerActionStatus.Error,
+    }
+  }
+
   // Check for user
   let user = await db.user.findFirst({
     where: {

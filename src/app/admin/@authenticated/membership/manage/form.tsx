@@ -1,6 +1,6 @@
 "use client"
 
-import { useForm } from "react-hook-form"
+import { type SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
@@ -89,7 +89,13 @@ export function AdminMembershipCRUDForm({
   }, [membershipTemplateState, onSuccess, onSuccessFired])
 
   return (
-    <form action={form.handleSubmit(membershipTemplateAction) as any}>
+    <form
+      action={
+        form.handleSubmit(
+          membershipTemplateAction as SubmitHandler<z.infer<typeof formSchema>>,
+        ) as any
+      }
+    >
       <Form {...form}>
         {CRUDFormIntent.Edit && (
           <FormField
