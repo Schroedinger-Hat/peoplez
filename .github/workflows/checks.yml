@@ -85,7 +85,7 @@ jobs:
           DATABASE_URL: postgres://test:test@localhost:5432/db
 
       - name: Build
-        run: ${{ steps.detect-package-manager.outputs.manager }} run build
+        run: ${{ steps.detect-package-manager.outputs.manager }} run build -d
         env:
           SKIP_ENV_VALIDATION: true
           DATABASE_URL: postgres://test:test@localhost:5432/db
