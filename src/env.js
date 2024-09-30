@@ -58,7 +58,7 @@ export const env = createEnv({
     EMAIL_FROM: z.string().email().optional(),
     EMAIL_SERVER_HOST: z.string().optional(),
     EMAIL_SERVER_PASSWORD: z.string().optional(),
-    EMAIL_SERVER_PORT: z.number().optional(),
+    EMAIL_SERVER_PORT: z.coerce.number().optional(),
     EMAIL_SERVER_USER: z.string().optional(),
 
     MARKETING_NAME: z.string().optional(),
