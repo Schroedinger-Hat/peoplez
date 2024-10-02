@@ -30,8 +30,6 @@ export const env = createEnv({
     EMAIL_SERVER_PASSWORD: process.env.EMAIL_SERVER_PASSWORD,
     EMAIL_SERVER_PORT: process.env.EMAIL_SERVER_PORT,
     EMAIL_SERVER_USER: process.env.EMAIL_SERVER_USER,
-    MARKETING_NAME: process.env.MARKETING_NAME,
-    MARKETING_WEBSITE_URL: process.env.MARKETING_WEBSITE_URL,
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
       process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
@@ -60,9 +58,6 @@ export const env = createEnv({
     EMAIL_SERVER_PASSWORD: z.string().optional(),
     EMAIL_SERVER_PORT: z.string().optional(),
     EMAIL_SERVER_USER: z.string().optional(),
-
-    MARKETING_NAME: z.string().optional(),
-    MARKETING_WEBSITE_URL: z.string().optional(),
 
     NEXTAUTH_SECRET:
       process.env.NODE_ENV === "production"

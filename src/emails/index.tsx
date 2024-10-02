@@ -29,7 +29,7 @@ export default function Email() {
               src={`${baseUrl}/static/org-logo.png`}
               width={48}
               height={48}
-              alt={process.env.MARKETING_EMAIL_NAME}
+              alt={"MARKETING_EMAIL_NAME"}
             />
             <Heading style={heading}>🪄 Your magic link</Heading>
             <Section style={body}>
@@ -54,8 +54,8 @@ export default function Email() {
                 margin: "20px 0",
               }}
             />
-            <Text style={footer}>{process.env.MARKETING_EMAIL_NAME}</Text>
-            <Text style={footer}>{process.env.MARKETING_EMAIL_ADDRESS}</Text>
+            <Text style={footer}>{"MARKETING_EMAIL_NAME"}</Text>
+            <Text style={footer}>{"MARKETING_EMAIL_ADDRESS"}</Text>
           </Container>
         </Body>
       </Html>

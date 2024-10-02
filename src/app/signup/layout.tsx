@@ -30,7 +30,7 @@ export default function SignUpLayout({
       </div>
       <div className="container relative hidden h-dvh flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         <Link
-          href={process.env.MARKETING_WEBSITE_URL!}
+          href={"MARKETING_WEBSITE_URL"}
           className={cn(
             buttonVariants({ variant: "ghost" }),
             "absolute right-4 top-4 md:right-8 md:top-8",
@@ -42,7 +42,7 @@ export default function SignUpLayout({
           <div className="absolute inset-0 bg-zinc-900" />
           <div className="relative z-20 flex items-center text-lg font-medium">
             <Image src={logoWhite} alt={"logo"} width={42} className={"mr-3"} />
-            {process.env.MARKETING_NAME}
+            {"MARKETING_NAME"}
           </div>
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">

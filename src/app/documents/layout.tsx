@@ -16,7 +16,7 @@ export default function LegalLayout({
         <div className={"flex items-center"}>
           <Image src={logo} alt={"logo"} width={42} className={"mr-4"} />
           <span className={"inline text-sm font-bold text-gray-200"}>
-            {process.env.MARKETING_NAME}
+            {"MARKETING_NAME"}
           </span>
         </div>
         <div>

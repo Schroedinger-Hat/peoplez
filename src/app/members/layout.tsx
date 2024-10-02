@@ -52,7 +52,7 @@ export default async function RootLayout({
                 className="flex items-center gap-2 font-semibold"
               >
                 <Image src={logo} alt={"logo"} width={32} className={"mr-1"} />
-                {process.env.MARKETING_NAME}
+                {"MARKETING_NAME"}
               </Link>
             </div>
             <div className="flex-1">
