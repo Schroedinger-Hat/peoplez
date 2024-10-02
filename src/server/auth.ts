@@ -35,25 +35,22 @@ declare module "next-auth" {
   // }
 }
 
-/**
- * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
- *
- * @see https://next-auth.js.org/configuration/options
- */
-const emailProvider = EmailProvider({
-  from: env.EMAIL_FROM,
-  server: {
-    auth: {
-      pass: env.EMAIL_SERVER_PASSWORD,
-      user: env.EMAIL_SERVER_USER,
-    },
-    host: env.EMAIL_SERVER_HOST,
-    port: env.EMAIL_SERVER_PORT,
-  },
-})
+const providers: Provider[] = []
 
-const providers: Provider[] = [
-  {
+if (env.EMAIL_SERVER_HOST) {
+  const emailProvider = EmailProvider({
+    from: env.EMAIL_FROM,
+    server: {
+      auth: {
+        pass: env.EMAIL_SERVER_PASSWORD,
+        user: env.EMAIL_SERVER_USER,
+      },
+      host: env.EMAIL_SERVER_HOST,
+      port: Number(env.EMAIL_SERVER_PORT),
+    },
+  })
+
+  providers.push({
     ...emailProvider,
     async sendVerificationRequest(params: SendVerificationRequestParams) {
       if (inDevEnvironment) {
@@ -62,8 +59,8 @@ const providers: Provider[] = [
         return emailProvider.sendVerificationRequest(params)
       }
     },
-  },
-]
+  })
+}
 
 if (env.DISCORD_CLIENT_ID && env.DISCORD_CLIENT_SECRET) {
   providers.push(

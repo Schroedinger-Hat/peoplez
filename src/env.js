@@ -15,7 +15,7 @@ export const env = createEnv({
    * Makes it so that empty strings are treated as undefined. `SOME_VAR: z.string()` and
    * `SOME_VAR=''` will throw an error.
    */
-  emptyStringAsUndefined: false,
+  emptyStringAsUndefined: true,
 
   /**
    * You can't destruct `process.env` as a regular object in the Next.js edge runtimes (e.g.
