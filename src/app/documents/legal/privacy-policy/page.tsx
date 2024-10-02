@@ -40,5 +40,5 @@ export default function PrivacyPolicyPage() {
         at nulla.
       </p>
     </>
-  );
+  )
 }

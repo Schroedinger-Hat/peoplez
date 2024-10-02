@@ -1,16 +1,16 @@
 interface GenericChildrenInterface {
-  children: React.ReactNode;
-  props?: React.PropsWithChildren;
+  children: React.ReactNode
+  props?: React.PropsWithChildren
 }
 
 export function Paragraph({ children }: GenericChildrenInterface) {
-  return <p className={"font text-md text-gray-600"}>{children}</p>;
+  return <p className={"font text-md text-gray-600"}>{children}</p>
 }
 
 interface SectionTitleInterface {
-  title: string;
-  description: string;
-  size?: SizeEnum;
+  title: string
+  description: string
+  size?: SizeEnum
 }
 
 enum SizeEnum {
@@ -33,7 +33,7 @@ export function SectionTitle({
       )}
       <Paragraph>{description}</Paragraph>
     </div>
-  );
+  )
 }
 
 export function LinkLabel({ children }: GenericChildrenInterface) {
@@ -43,5 +43,5 @@ export function LinkLabel({ children }: GenericChildrenInterface) {
     >
       {children}
     </span>
-  );
+  )
 }

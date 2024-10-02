@@ -1,5 +1,5 @@
-import { createEnv } from "@t3-oss/env-nextjs";
-import { z } from "zod";
+import { createEnv } from "@t3-oss/env-nextjs"
+import { z } from "zod"
 
 export const env = createEnv({
   /**
@@ -8,7 +8,7 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string(),
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().optional(),
   },
 
   /**
@@ -28,10 +28,8 @@ export const env = createEnv({
     EMAIL_FROM: process.env.EMAIL_FROM,
     EMAIL_SERVER_HOST: process.env.EMAIL_SERVER_HOST,
     EMAIL_SERVER_PASSWORD: process.env.EMAIL_SERVER_PASSWORD,
-    EMAIL_SERVER_PORT: Number(process.env.EMAIL_SERVER_PORT),
+    EMAIL_SERVER_PORT: process.env.EMAIL_SERVER_PORT,
     EMAIL_SERVER_USER: process.env.EMAIL_SERVER_USER,
-    MARKETING_NAME: process.env.MARKETING_NAME,
-    MARKETING_WEBSITE_URL: process.env.MARKETING_WEBSITE_URL,
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
       process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
@@ -52,17 +50,14 @@ export const env = createEnv({
         (str) => !str.includes("YOUR_MYSQL_URL_HERE"),
         "You forgot to change the default URL",
       ),
-    DISCORD_CLIENT_ID: z.string(),
-    DISCORD_CLIENT_SECRET: z.string(),
-    EMAIL_FROM: z.string().email(),
-    EMAIL_SERVER_HOST: z.string(),
-    EMAIL_SERVER_PASSWORD: z.string(),
+    DISCORD_CLIENT_ID: z.string().optional(),
+    DISCORD_CLIENT_SECRET: z.string().optional(),
 
-    EMAIL_SERVER_PORT: z.number(),
-    EMAIL_SERVER_USER: z.string(),
-
-    MARKETING_NAME: z.string(),
-    MARKETING_WEBSITE_URL: z.string(),
+    EMAIL_FROM: z.string().email().optional(),
+    EMAIL_SERVER_HOST: z.string().optional(),
+    EMAIL_SERVER_PASSWORD: z.string().optional(),
+    EMAIL_SERVER_PORT: z.string().optional(),
+    EMAIL_SERVER_USER: z.string().optional(),
 
     NEXTAUTH_SECRET:
       process.env.NODE_ENV === "production"
@@ -78,7 +73,7 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
-    STRIPE_PRIVATE_KEY: z.string(),
+    STRIPE_PRIVATE_KEY: z.string().optional(),
   },
 
   /**
@@ -86,4 +81,4 @@ export const env = createEnv({
    * useful for Docker builds.
    */
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
-});
+})

@@ -1,19 +1,16 @@
-"use server";
+"use server"
 
-import {
-  type ServerActionState,
-  ServerActionStatus,
-} from "@/app/actions/types";
-import { db } from "@/services/db";
-import { PricePeriod, type PriceUnit } from "@prisma/client";
+import { type ServerActionState, ServerActionStatus } from "@/app/actions/types"
+import { db } from "@/services/db"
+import { PricePeriod, type PriceUnit } from "@prisma/client"
 
 export interface FormProps {
-  title: string;
-  description?: string;
-  features?: string;
-  priceAmount: number;
-  priceUnit: PriceUnit;
-  stripePriceId: string;
+  title: string
+  description?: string
+  features?: string
+  priceAmount: number
+  priceUnit: PriceUnit
+  stripePriceId: string
 }
 
 export async function createMembershipTemplate(
@@ -35,10 +32,10 @@ export async function createMembershipTemplate(
       createdAt: new Date(),
       updatedAt: new Date(),
     },
-  });
+  })
 
   return {
     status: ServerActionStatus.Success,
     payload: membershipTemplate,
-  };
+  }
 }

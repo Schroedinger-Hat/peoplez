@@ -4,9 +4,9 @@ import { MembershipStatus } from "@prisma/client"
 
 import { type ServerActionState, ServerActionStatus } from "@/app/actions/types"
 import { db } from "@/services/db"
-import { stripe } from "@/services/stripe"
+import { canUseStripe, stripe } from "@/services/stripe"
 
-const MEMBERSHIP_PRICE_ID = "price_1P3HNlCXdJySzBrwlcoAQqS2"
+const MEMBERSHIP_PRICE_ID = "price_1P3HNlCXdJySzBrwlcoAQqS2" // TODO: Remove the hardcoded price ID
 
 export interface FormProps {
   email: string
@@ -20,6 +20,16 @@ export async function createMembership(
   prevState: ServerActionState,
   data: FormProps,
 ): Promise<ServerActionState> {
+  if (!canUseStripe()) {
+    return {
+      errors: [
+        {
+          message: "Stripe is not configured",
+        },
+      ],
+      status: ServerActionStatus.Error,
+    }
+  }
   // Avoid double membership creation
   if (prevState.nextStep === "providePayment") return prevState
 
@@ -29,6 +39,18 @@ export async function createMembership(
       id: data.membershipTemplateId,
     },
   })
+
+  // No template, return error
+  if (!membershipTemplate) {
+    return {
+      errors: [
+        {
+          message: "Membership template not found",
+        },
+      ],
+      status: ServerActionStatus.Error,
+    }
+  }
 
   // Check for user
   let user = await db.user.findFirst({
@@ -52,7 +74,7 @@ export async function createMembership(
   // User is not linked to Stripe, creates it
   if (!user.stripeCustomerId) {
     // Create customer to Stripe and link it to user
-    const stripeCustomer = await stripe.customers.create({
+    const stripeCustomer = await stripe().customers.create({
       email: data.email,
       name: `${data.firstName} ${data.lastName}`.trim(),
     })
@@ -97,7 +119,7 @@ export async function createMembership(
   })
 
   // Create Stripe subscription
-  const stripeSubscription = await stripe.subscriptions.create({
+  const stripeSubscription = await stripe().subscriptions.create({
     customer: user.stripeCustomerId,
     expand: ["latest_invoice.payment_intent"],
     items: [
@@ -123,7 +145,8 @@ export async function createMembership(
     nextStep: "providePayment",
     payload: {
       // eslint-disable-next-line
-            clientSecret: (stripeSubscription?.latest_invoice as any)?.payment_intent?.client_secret,
+      clientSecret: (stripeSubscription?.latest_invoice as any)?.payment_intent
+        ?.client_secret,
       membershipId: membership.id,
     },
     status: ServerActionStatus.Success,

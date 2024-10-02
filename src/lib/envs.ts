@@ -1,2 +1,2 @@
 export const inDevEnvironment =
-  !!process && process.env.NODE_ENV === "development";
+  !!process && process.env.NODE_ENV === "development"

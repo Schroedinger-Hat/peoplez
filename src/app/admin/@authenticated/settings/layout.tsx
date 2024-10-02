@@ -1,16 +1,16 @@
-import { find } from "lodash";
+import { find } from "lodash"
 
-import { adminMenuTreeConfig } from "@/app/admin/const";
-import { LinkWithActive } from "@/components/molecules/linkWithActive";
+import { adminMenuTreeConfig } from "@/app/admin/const"
+import { LinkWithActive } from "@/components/molecules/linkWithActive"
 
 interface AdminAuthenticatedLayoutInterface {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export default async function AdminAuthenticatedLayout({
   children,
 }: AdminAuthenticatedLayoutInterface) {
-  const settingsChildren = find(adminMenuTreeConfig, { id: "settings" })!;
+  const settingsChildren = find(adminMenuTreeConfig, { id: "settings" })!
 
   return (
     <>
@@ -28,5 +28,5 @@ export default async function AdminAuthenticatedLayout({
         <div className="grid gap-6">{children}</div>
       </div>
     </>
-  );
+  )
 }

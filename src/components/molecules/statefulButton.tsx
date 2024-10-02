@@ -1,11 +1,11 @@
-"use client";
-import { noop } from "lodash";
-import { useFormStatus } from "react-dom";
+"use client"
+import { noop } from "lodash"
+import { useFormStatus } from "react-dom"
 
-import { Button, type ButtonProps } from "@/components/ui/button";
+import { Button, type ButtonProps } from "@/components/ui/button"
 
 interface StatefulButtonProps extends ButtonProps {
-  loading?: boolean;
+  loading?: boolean
 }
 
 export function StatefulButton({
@@ -13,14 +13,14 @@ export function StatefulButton({
   children,
   ...props
 }: StatefulButtonProps) {
-  const formStatus = useFormStatus();
-  const isLoading = formStatus.pending || loading;
+  const formStatus = useFormStatus()
+  const isLoading = formStatus.pending || loading
 
   if (isLoading)
     return (
       <Button {...props} onClick={noop} disabled={true}>
         Loading...
       </Button>
-    );
-  else return <Button {...props}>{children}</Button>;
+    )
+  else return <Button {...props}>{children}</Button>
 }

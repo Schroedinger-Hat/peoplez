@@ -12,14 +12,16 @@ jobs:
 
     services:
       postgres:
-        image: postgres
+        image: postgres:latest
         env:
-          POSTGRES_PASSWORD: postgres
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: db
+          POSTGRESQL_FSYNC: "off"
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - name: Checkout
@@ -70,16 +72,21 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} run lint
         env:
           SKIP_ENV_VALIDATION: true
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+          DATABASE_URL: postgres://test:test@localhost:5432/db
 
       - name: Lint Prisma
         run: ${{ steps.detect-package-manager.outputs.manager }} run lint:prisma
         env:
-          SKIP_ENV_VALIDATION: true
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+          DATABASE_URL: postgres://test:test@localhost:5432/db
+
+      - name: Can run Migrations
+        run: ${{ steps.detect-package-manager.outputs.manager }} run db:push
+        env:
+          DATABASE_URL: postgres://test:test@localhost:5432/db
 
       - name: Build
-        run: ${{ steps.detect-package-manager.outputs.manager }} run build
+        run: ${{ steps.detect-package-manager.outputs.manager }} run build -d
         env:
-          SKIP_ENV_VALIDATION: true
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+          DATABASE_URL: postgres://test:test@localhost:5432/db
+          NEXTAUTH_SECRET: secret
+          NEXTAUTH_URL: http://localhost:3000

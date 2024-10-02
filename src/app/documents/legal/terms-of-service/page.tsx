@@ -40,5 +40,5 @@ export default function TermsOfServicePage() {
         at nulla.
       </p>
     </>
-  );
+  )
 }

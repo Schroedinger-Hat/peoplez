@@ -1,13 +1,13 @@
-import Link from "next/link";
+import Link from "next/link"
 
-import { Placeholder } from "@/components/devtool/placeholder";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { LinkLabel, Paragraph, SectionTitle } from "@/components/ui/typography";
-import { getServerAuthSession } from "@/server/auth";
+import { Placeholder } from "@/components/devtool/placeholder"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { LinkLabel, Paragraph, SectionTitle } from "@/components/ui/typography"
+import { getServerAuthSession } from "@/server/auth"
 
 export default async function AdminHomePage() {
-  const session = await getServerAuthSession();
+  const session = await getServerAuthSession()
 
   return (
     <>
@@ -127,5 +127,5 @@ export default async function AdminHomePage() {
         </div>
       </div>
     </>
-  );
+  )
 }
