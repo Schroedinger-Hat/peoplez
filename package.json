@@ -17,7 +17,8 @@
     "lint:prisma": "prisma validate",
     "lint:fix": "next lint --fix && prisma format",
     "start": "next start",
-    "ragequit": "rm -rf .next && npm run db:push && npm run dev"
+    "ragequit": "rm -rf .next && npm run db:push && npm run dev",
+    "seed": "prisma db seed"
   },
   "prisma": {
     "seed": "tsx prisma/seeds/index.ts"

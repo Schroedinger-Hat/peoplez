@@ -1,24 +1,19 @@
-import { DiscordSignIn } from "@/app/admin/@unauthenticated/components/discordSignIn"
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+"use client"
+
+import { LoginForm } from "@/app/shared/login/form"
+import { Target } from "@/app/shared/login/types"
 
 export default function AdminLogin() {
   return (
-    <Card className="max-w-sm">
-      <CardHeader>
-        <CardTitle className="text-2xl">Login</CardTitle>
-        <CardDescription>
-          You need to login in order to access the admin
-        </CardDescription>
-      </CardHeader>
-      <CardFooter className={"flex justify-center"}>
-        <DiscordSignIn />
-      </CardFooter>
-    </Card>
+    <main className="flex h-screen items-center justify-center bg-zinc-900">
+      <div>
+        <LoginForm
+          target={Target.AdminPortal}
+          description={
+            "Enter your email below, we're going to send you a magic link"
+          }
+        />
+      </div>
+    </main>
   )
 }
