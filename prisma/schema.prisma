@@ -16,12 +16,13 @@ datasource db {
 
 // Core Elements
 model Configurable {
-  id        String           @id @default(cuid())
-  name      String           @unique
-  type      ConfigurableType
-  value     String
-  createdAt DateTime         @default(now())
-  updatedAt DateTime         @updatedAt
+  id          String           @id @default(cuid())
+  name        String           @unique
+  description String?
+  type        ConfigurableType
+  value       String
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
 
   @@index([name])
 }
