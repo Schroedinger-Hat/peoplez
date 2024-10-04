@@ -25,7 +25,6 @@ import { useEffect, useState } from "react"
 import { useFormState } from "react-dom"
 import { validateUserEmail } from "@/app/actions/validateUserEmail"
 import { signIn } from "next-auth/react"
-import { Debug } from "@/components/devtool/debug"
 import { type LoginFormProps } from "@/app/shared/login/types"
 
 const formSchema = z.object({
@@ -60,7 +59,6 @@ export function LoginForm({ description, target }: LoginFormProps) {
           email: validateUserEmailState.email,
           redirect: false,
         })
-        console.log(reply)
         setRequestedMagicLink(true)
         setWorking(false)
       }
@@ -76,10 +74,6 @@ export function LoginForm({ description, target }: LoginFormProps) {
           <CardHeader>
             <CardTitle className="text-2xl">Login</CardTitle>
             <CardDescription>{description}</CardDescription>
-            <Debug>{form.getValues()}</Debug>
-            <Debug>{working}</Debug>
-            <Debug>{requestedMagicLink}</Debug>
-            <Debug>{validateUserEmailState}</Debug>
           </CardHeader>
           <CardContent className="grid gap-4">
             {validateUserEmailState.checked &&
