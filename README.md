@@ -61,7 +61,34 @@ Peoplez is an open-source, self-hosted organisation management software that all
 ## Usage
 
 <!-- CONTRIBUTING -->
-TBD
+You can spin up the project by following the steps below:
+
+### Without docker
+A postgres database is required to run the project.
+You can set up a local postgres database or use a cloud service like [Supabase](https://supabase.io/)
+
+1. Clone .env.example to .env and fill the database url fields
+
+2. Run the following scripts
+    
+       npm install
+       npm run db:push
+       npm run dev
+
+3. If you want to seed the database, run the following script before running the dev script
+
+       npm run db:seed
+
+### Docker
+A docker-compose file is provided for you to run the project and dependencies in a containerized environment.
+
+1. You can run the following command to start the project
+
+       docker-compose up
+    
+This will spin up a local postgres database, maildev for easily troubleshooting email issues, and the project itself.  
+Database seeds are automatically applied when the project starts.
+
 
 ## Contributing
 
