@@ -5,7 +5,6 @@ import {
   type NextAuthOptions,
 } from "next-auth"
 import { type Adapter } from "next-auth/adapters"
-import DiscordProvider from "next-auth/providers/discord"
 import EmailProvider, {
   type SendVerificationRequestParams,
 } from "next-auth/providers/email"
@@ -60,14 +59,9 @@ if (env.EMAIL_SERVER_HOST) {
       }
     },
   })
-}
-
-if (env.DISCORD_CLIENT_ID && env.DISCORD_CLIENT_SECRET) {
-  providers.push(
-    DiscordProvider({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
-    }),
+} else {
+  console.warn(
+    "Email server not configured, login and emails will not be available.",
   )
 }
 

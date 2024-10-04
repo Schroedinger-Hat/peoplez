@@ -12,6 +12,7 @@
     "db:migrate": "prisma migrate dev --create-only",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
+    "db:seed": "prisma seed",
 
     "dev:email": "npx dotenv-run-script dev:email-noenv",
     "dev:email-noenv": "email dev --dir src/emails",
