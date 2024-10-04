@@ -16,7 +16,7 @@ import * as React from "react"
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : ""
-console.log(process.env)
+
 export default function Email() {
   return (
     <>
