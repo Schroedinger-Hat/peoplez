@@ -1,0 +1,56 @@
+#Spins two containers, one with postgres and the other one with the nextjs app
+
+services:
+  #  Dependencies
+  postgres:
+    image: postgres
+    container_name: peoplez-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: peoplez
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      retries: 3
+      start_period: 30s
+      timeout: 10s
+
+  maildev:
+    image: maildev/maildev
+    container_name: peoplez-maildev
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+
+  # Application
+  nextjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: peoplez-nextjs
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - postgres
+
+  # Migrations
+  migrations:
+    restart: "no"
+    command: "npm run db:docker"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: peoplez-migrations
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      postgres:
+        condition:
+          service_healthy
