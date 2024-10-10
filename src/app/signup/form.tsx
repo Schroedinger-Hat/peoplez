@@ -105,6 +105,7 @@ export default function SignupForm({ membershipTemplates }: SignupFormProps) {
       "socialSecurityNumber",
       "statuteApproval",
     ])
+
     if (stepIsValid) setStep(3)
   }
 
@@ -391,7 +392,7 @@ function Step4({ state, setStep }: Step4Props) {
       elements: elements!,
       redirect: "if_required",
     })
-    console.log(confirmPayment)
+
     if ((confirmPayment?.paymentIntent as any)?.status === "succeeded") {
       setStep(5)
     }
