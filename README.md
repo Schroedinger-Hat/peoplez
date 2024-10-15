@@ -1,5 +1,5 @@
 <div align='center'>
-  
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -11,19 +11,19 @@
 <br />
 <div align="center">
   <h1>Peoplez</h1>
-  
-  <a href="https://github.com/Schrodinger-Hat/peoplez">
+
+  <a href="https://github.com/schroedinger-Hat/peoplez">
     <img src="public/sh.png" alt="Logo" width="80" height="80">
   </a>
 
   <p align="center">
     <br />
-    <a href="https://github.com/Schrodinger-Hat/peoplez/blob/main/README.md"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/schroedinger-Hat/peoplez/blob/main/README.md"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Schrodinger-Hat/Template/issues">Report Bug</a>
+    <a href="https://github.com/schroedinger-Hat/Template/issues">Report Bug</a>
     ·
-    <a href="https://github.com/Schrodinger-Hat/Template/issues">Request Feature</a>
+    <a href="https://github.com/schroedinger-Hat/Template/issues">Request Feature</a>
   </p>
 </div>
 
@@ -70,7 +70,7 @@ You can set up a local postgres database or use a cloud service like [Supabase](
 1. Clone .env.example to .env and fill the database url fields
 
 2. Run the following scripts
-    
+
        npm install
        npm run db:push
        npm run dev
@@ -85,8 +85,8 @@ A docker-compose file is provided for you to run the project and dependencies in
 1. You can run the following command to start the project
 
        docker-compose up
-    
-This will spin up a local postgres database, maildev for easily troubleshooting email issues, and the project itself.  
+
+This will spin up a local postgres database, maildev for easily troubleshooting email issues, and the project itself.
 Database seeds are automatically applied when the project starts.
 
 
@@ -101,19 +101,18 @@ Don't forget to give the project a star! Thanks again!
 
 ## Contact
 
-Schrödinger's Hat Team - [@schrodinger_hat](mailto:schrodinger.hat.show@gmail.com)
+Schrödinger's Hat Team - [@schroedinger_hat](mailto:social@schroedinger-hat.org)
 
-Project Link: [https://github.com/Schrodinger-Hat/peoplez](https://github.com/Schrodinger-Hat/peoplez)
+Project Link: [https://github.com/schroedinger-Hat/peoplez](https://github.com/schroedinger-Hat/peoplez)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/Schrodinger-Hat/peoplez.svg?style=for-the-badge
-[contributors-url]: https://github.com/Schrodinger-Hat/peoplez/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Schrodinger-Hat/peoplez.svg?style=for-the-badge
-[forks-url]: https://github.com/Schrodinger-Hat/peoplez/network/members
-[stars-shield]: https://img.shields.io/github/stars/Schrodinger-Hat/peoplez?style=for-the-badge
-[stars-url]: https://github.com/Schrodinger-Hat/peoplez/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Schrodinger-Hat/peoplez.svg?style=for-the-badge
-[issues-url]: https://github.com/Schrodinger-Hat/peoplez/issues
-
+[contributors-shield]: https://img.shields.io/github/contributors/schroedinger-Hat/peoplez.svg?style=for-the-badge
+[contributors-url]: https://github.com/schroedinger-Hat/peoplez/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/schroedinger-Hat/peoplez.svg?style=for-the-badge
+[forks-url]: https://github.com/schroedinger-Hat/peoplez/network/members
+[stars-shield]: https://img.shields.io/github/stars/schroedinger-Hat/peoplez?style=for-the-badge
+[stars-url]: https://github.com/schroedinger-Hat/peoplez/stargazers
+[issues-shield]: https://img.shields.io/github/issues/schroedinger-Hat/peoplez.svg?style=for-the-badge
+[issues-url]: https://github.com/schroedinger-Hat/peoplez/issues
