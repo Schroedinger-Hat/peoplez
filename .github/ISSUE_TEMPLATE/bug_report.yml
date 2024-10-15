@@ -1,12 +1,12 @@
 name: 🐞 Bug report
-description: Create a report to help us improve our project 
+description: Create a report to help us improve our project
 labels: [bug]
 body:
   - type: markdown
     attributes:
       value: |
         Please carefully read our code of conduct before creating a bug report
-        👉 https://www.schrodinger-hat.it/code-of-conduct
+        👉 https://www.schroedinger-hat.org/code-of-conduct
 
   - type: textarea
     id: reproduction
