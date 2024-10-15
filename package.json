@@ -6,20 +6,26 @@
   "license": "AGPL-3.0-only",
   "scripts": {
     "build": "next build",
+    "start": "next start",
+    "dev": "next dev",
+
     "db:migrate": "prisma migrate dev --create-only",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
+    "db:seed": "prisma seed",
     "db:docker": "npm run db:push && npm run seed",
-    "dev": "next dev",
+
     "dev:email": "npx dotenv-run-script dev:email-noenv",
     "dev:email-noenv": "email dev --dir src/emails",
+
     "postinstall": "prisma generate",
+
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "lint:prisma": "prisma validate",
-    "lint:fix": "next lint --fix && prisma format",
-    "start": "next start",
-    "ragequit": "rm -rf .next && npm run db:push && npm run dev",
-    "seed": "prisma db seed"
+    "lint:prisma:fix": "prisma format",
+
+    "ragequit": "rm -rf .next && npm run db:push && npm run dev"
   },
   "prisma": {
     "seed": "tsx prisma/seeds/index.ts"
