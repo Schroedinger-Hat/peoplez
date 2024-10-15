@@ -16,7 +16,8 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "lint:prisma": "prisma validate",
-    "lint:fix": "next lint --fix && prisma format",
+    "lint:prisma:fix": "prisma format",
+    "lint:fix": "next lint --fix",
     "start": "next start",
     "ragequit": "rm -rf .next && npm run db:push && npm run dev",
     "seed": "prisma db seed"
