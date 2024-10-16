@@ -33,6 +33,9 @@ export async function DevPage() {
             <Link href={"/admin"}>
               <Button>Admin Portal</Button>
             </Link>
+            <Link href={"/emails"}>
+              <Button>Emails</Button>
+            </Link>
           </div>
 
           <Debug title={"session"}>{session}</Debug>

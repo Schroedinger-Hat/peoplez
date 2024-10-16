@@ -14,3 +14,17 @@ export function usernameToInitials(username: string) {
     .join("")
     .toUpperCase()
 }
+
+export function stringToBoolean(str: string): boolean {
+  if (typeof str !== "string") {
+    throw new Error("Input must be a string")
+  }
+
+  if (str.toLowerCase() === "true") {
+    return true
+  } else if (str.toLowerCase() === "false") {
+    return false
+  } else {
+    throw new Error(`Invalid input: "${str}". Expected "true" or "false".`)
+  }
+}

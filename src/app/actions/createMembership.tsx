@@ -5,9 +5,8 @@ import { MembershipStatus } from "@prisma/client"
 import { type ServerActionState, ServerActionStatus } from "@/app/actions/types"
 import { db } from "@/services/db"
 import { canUseStripe, stripe } from "@/services/stripe"
-import { render } from "@react-email/components"
 import { mailer } from "@/services/nodemailer"
-import MembershipConfirmationEmail from "@/emails/membershipConfirmedEmail"
+import { confirmationEmail } from "@/emails/renders/membershipConfirmedEmailRender"
 
 const MEMBERSHIP_PRICE_ID = "price_1P3HNlCXdJySzBrwlcoAQqS2" // TODO: Remove the hardcoded price ID
 
@@ -122,8 +121,6 @@ export async function createMembership(
   })
 
   // Send confirmation email
-  const confirmationEmail = render(<MembershipConfirmationEmail />)
-
   await mailer().sendMail({
     from: "noreply@schrodinger-hat.org",
     to: data.email,

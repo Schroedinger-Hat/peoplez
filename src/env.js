@@ -22,12 +22,14 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
+    DEVELOPER: process.env.DEVELOPER,
     DATABASE_URL: process.env.DATABASE_URL,
     EMAIL_FROM: process.env.EMAIL_FROM,
     EMAIL_SERVER_HOST: process.env.EMAIL_SERVER_HOST,
     EMAIL_SERVER_PASSWORD: process.env.EMAIL_SERVER_PASSWORD,
     EMAIL_SERVER_PORT: process.env.EMAIL_SERVER_PORT,
     EMAIL_SERVER_USER: process.env.EMAIL_SERVER_USER,
+    EMAIL_SECURE: process.env.EMAIL_SECURE,
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
       process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
@@ -41,6 +43,7 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
+    DEVELOPER: z.string().optional(),
     DATABASE_URL: z
       .string()
       .url()
@@ -54,6 +57,7 @@ export const env = createEnv({
     EMAIL_SERVER_PASSWORD: z.string().optional(),
     EMAIL_SERVER_PORT: z.string().optional(),
     EMAIL_SERVER_USER: z.string().optional(),
+    EMAIL_SECURE: z.string().optional(),
 
     NEXTAUTH_SECRET:
       process.env.NODE_ENV === "production"
