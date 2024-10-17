@@ -7,7 +7,7 @@ const CONFIRMATION_EMAIL = `confirmation`
 const APPROVED_EMAIL = `approved`
 const REJECTED_EMAIL = `rejected`
 
-const EmailsPage = ({ children }: { children: React.ReactNode }) => {
+const EmailsPage = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
@@ -47,7 +47,6 @@ const EmailsPage = ({ children }: { children: React.ReactNode }) => {
       </Button>
       {error && <p className="text-red-500">{error}</p>}
       {success && <p className="text-green-500">{success}</p>}
-      {children}
     </div>
   )
 }
