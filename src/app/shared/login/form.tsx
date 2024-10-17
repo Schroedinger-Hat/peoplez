@@ -51,11 +51,10 @@ export function LoginForm({ description, target }: LoginFormProps) {
   )
 
   useEffect(() => {
-    console.log(target)
     const handler = async () => {
       if (!requestedMagicLink && validateUserEmailState.valid) {
         setWorking(true)
-        const reply = await signIn("email", {
+        await signIn("email", {
           email: validateUserEmailState.email,
           redirect: false,
         })
