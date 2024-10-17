@@ -5,6 +5,8 @@ import { MembershipStatus } from "@prisma/client"
 import { type ServerActionState, ServerActionStatus } from "@/app/actions/types"
 import { db } from "@/services/db"
 import { canUseStripe, stripe } from "@/services/stripe"
+import { mailer } from "@/services/nodemailer"
+import { confirmationEmail } from "@/emails/renders/membershipConfirmedEmailRender"
 
 const MEMBERSHIP_PRICE_ID = "price_1P3HNlCXdJySzBrwlcoAQqS2" // TODO: Remove the hardcoded price ID
 
@@ -116,6 +118,15 @@ export async function createMembership(
       userId: user.id,
       membershipTemplateId: membershipTemplate.id,
     },
+  })
+
+  // Send confirmation email
+  await mailer().sendMail({
+    from: "noreply@schrodinger-hat.org",
+    to: data.email,
+    subject:
+      "Welcome to the Open Source community! Welcome to Schroedinger Hat",
+    html: confirmationEmail,
   })
 
   // Create Stripe subscription
