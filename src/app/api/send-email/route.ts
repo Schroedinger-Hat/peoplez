@@ -6,7 +6,7 @@ import { confirmationEmail } from "@/emails/renders/membershipConfirmedEmailRend
 export async function POST() {
   try {
     const response = await mailer().sendMail({
-      from: "noreply@schrodinger-hat.org", // TODO: needs to be updated
+      from: "noreply@schroedinger-hat.org", // TODO: needs to be updated
       to: "email@gmail.com", // TODO: needs to be updated
       subject:
         "Welcome to the Open Source community! Welcome to Schroedinger Hat",
