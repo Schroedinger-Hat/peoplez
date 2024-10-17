@@ -4,6 +4,7 @@ import { mailer } from "@/services/nodemailer"
 import { confirmationEmail } from "@/emails/renders/membershipConfirmedEmailRender"
 import { approvedEmail } from "@/emails/renders/membershipApprovedEmail"
 import { rejectedEmail } from "@/emails/renders/membershipRejectedEmail"
+import { env } from "@/env"
 
 export async function POST(request: Request) {
   const { searchParams } = new URL(request.url)
@@ -51,7 +52,7 @@ export async function POST(request: Request) {
 
 const sendConfirmationEmail = async () => {
   return mailer().sendMail({
-    from: "noreply@schroedinger-hat.org", // TODO: needs to be updated
+    from: env.EMAIL_FROM,
     to: "email@gmail.com", // TODO: needs to be updated
     subject:
       "Welcome to the Open Source community! Welcome to Schroedinger Hat",
@@ -61,20 +62,20 @@ const sendConfirmationEmail = async () => {
 
 const sendRejectionEmail = async () => {
   return mailer().sendMail({
-    from: "noreply@schroedinger-hat.org", // TODO: needs to be updated
+    from: env.EMAIL_FROM,
     to: "email@gmail.com", // TODO: needs to be updated
     subject:
-      "Welcome to the Open Source community! Welcome to Schroedinger Hat",
+      "Your application to join the Open Source community has been rejected",
     html: rejectedEmail,
   })
 }
 
 const sendApprovedEmail = async () => {
   return mailer().sendMail({
-    from: "noreply@schroedinger-hat.org", // TODO: needs to be updated
+    from: env.EMAIL_FROM,
     to: "email@gmail.com", // TODO: needs to be updated
     subject:
-      "Welcome to the Open Source community! Welcome to Schroedinger Hat",
+      "Your application to join the Open Source community has been approved",
     html: approvedEmail,
   })
 }
