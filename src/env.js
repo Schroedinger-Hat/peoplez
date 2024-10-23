@@ -36,6 +36,11 @@ export const env = createEnv({
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NODE_ENV: process.env.NODE_ENV,
     STRIPE_PRIVATE_KEY: process.env.STRIPE_PRIVATE_KEY,
+    OTEL_DEFAULT_SAMPLE_PERCENTAGE: process.env.OTEL_DEFAULT_SAMPLE_PERCENTAGE,
+    OTEL_LOG_LEVEL: process.env.OTEL_LOG_LEVEL,
+    OTEL_EXPORTER_OTLP_ENDPOINT: process.env.OTEL_EXPORTER_OTLP_ENDPOINT,
+    OTEL_EXPORTER_OTLP_HEADERS: process.env.OTEL_EXPORTER_OTLP_HEADERS,
+    OTEL_SERVICE_NAME: process.env.OTEL_SERVICE_NAME,
   },
 
   /**
@@ -74,6 +79,11 @@ export const env = createEnv({
       .enum(["development", "test", "production"])
       .default("development"),
     STRIPE_PRIVATE_KEY: z.string().optional(),
+    OTEL_DEFAULT_SAMPLE_PERCENTAGE: z.string().optional(),
+    OTEL_LOG_LEVEL: z.string().optional(),
+    OTEL_EXPORTER_OTLP_ENDPOINT: z.string().optional(),
+    OTEL_EXPORTER_OTLP_HEADERS: z.string().optional(),
+    OTEL_SERVICE_NAME: z.string().optional(),
   },
 
   /**
