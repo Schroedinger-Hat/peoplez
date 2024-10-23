@@ -5,7 +5,7 @@ COPY package.json ./
 COPY package-lock.json ./
 COPY prisma ./prisma
 
-RUN npm install
+RUN npm ci
 
 COPY . .
 COPY .env.docker .env
