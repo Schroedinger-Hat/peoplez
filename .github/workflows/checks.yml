@@ -73,6 +73,11 @@ jobs:
         env:
           SKIP_ENV_VALIDATION: true
           DATABASE_URL: postgres://test:test@localhost:5432/db
+      
+      - name: Unit Test
+        run: ${{ steps.detect-package-manager.outputs.manager }} run test
+        env:
+          SKIP_ENV_VALIDATION: true
 
       - name: Lint Prisma
         run: ${{ steps.detect-package-manager.outputs.manager }} run lint:prisma
@@ -90,3 +95,8 @@ jobs:
           DATABASE_URL: postgres://test:test@localhost:5432/db
           NEXTAUTH_SECRET: secret
           NEXTAUTH_URL: http://localhost:3000
+      
+      - name: Unit Test Coverage
+        run: ${{ steps.detect-package-manager.outputs.manager }} run test:coverage
+        env:
+          SKIP_ENV_VALIDATION: true

@@ -52,7 +52,7 @@ if (env.EMAIL_SERVER_HOST) {
   providers.push({
     ...emailProvider,
     async sendVerificationRequest(params: SendVerificationRequestParams) {
-      if (inDevEnvironment) {
+      if (inDevEnvironment()) {
         console.log("\nRequested a magic link, signin with url:", params.url)
       }
       return emailProvider.sendVerificationRequest(params)
