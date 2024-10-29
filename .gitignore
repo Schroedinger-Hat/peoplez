@@ -46,3 +46,7 @@ yarn-error.log*
 
 .idea
 .vscode
+
+# playwright
+playwright-report
+test-results

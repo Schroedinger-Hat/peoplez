@@ -20,6 +20,8 @@
     "lint:fix": "next lint --fix && prisma format",
     "test": "SKIP_ENV_VALIDATION=true vitest",
     "test:coverage": "SKIP_ENV_VALIDATION=true vitest run --coverage",
+    "test:e2e": "npx playwright test",
+    "test:e2e:ui": "npx playwright test --ui",
     "start": "next start",
     "ragequit": "rm -rf .next && npm run db:push && npm run dev",
     "seed": "prisma db seed"
@@ -65,6 +67,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.48.2",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.0.1",
     "@types/eslint": "^8.56.2",
