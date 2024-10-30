@@ -29,6 +29,8 @@ jobs:
       run: npm ci
     - name: Copy env
       run: cp .env.e2e .env
+    - name: Do DB migrations
+      run: npm run db:push
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
@@ -39,6 +41,3 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
-    - name: Stop application
-      if: always()
-      run: docker compose down
