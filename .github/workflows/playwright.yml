@@ -27,8 +27,8 @@ jobs:
         node-version: lts/*
     - name: Install npm
       run: npm ci
-    - name: Build up the application
-      run: docker compose up -d
+    - name: Copy env
+      run: cp .env.docker .env
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
