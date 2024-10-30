@@ -10,9 +10,9 @@ jobs:
         postgres:
           image: postgres:latest
           env:
-            POSTGRES_USER: test
-            POSTGRES_PASSWORD: test
-            POSTGRES_DB: db
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: password
+            POSTGRES_DB: peoplez
             POSTGRESQL_FSYNC: "off"
           ports:
             - 5432:5432
@@ -28,7 +28,7 @@ jobs:
     - name: Install npm
       run: npm ci
     - name: Copy env
-      run: cp .env.docker .env
+      run: cp .env.e2e .env
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
