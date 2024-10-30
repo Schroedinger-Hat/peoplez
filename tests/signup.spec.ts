@@ -8,8 +8,8 @@ test.describe('Signup page', () => {
     signUpPage = new SignUpPage(page)
   })
 
-  test('Signup page is loading and has the basic elements', async ({ page }) => {
-    await signUpPage.goto('http://localhost:3000/signup')
+  test('Signup page is loading and has the basic elements', async () => {
+    await signUpPage.goto('/signup')
   
     await signUpPage.hasH1()
     await signUpPage.hasPresidentQuote()
