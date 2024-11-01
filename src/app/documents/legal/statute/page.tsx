@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Statute",
+  description: "Statute guidelines by Schrödinger Hat",
+}
+
 export default function StatutePage() {
   return (
     <>
