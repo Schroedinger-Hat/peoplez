@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Terms of Service",
+  description: "Terms of Service guidelines by Schrödinger Hat",
+}
+
 export default function TermsOfServicePage() {
   return (
     <>
