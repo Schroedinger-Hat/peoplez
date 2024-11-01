@@ -18,6 +18,11 @@ function getData(userId: string | undefined) {
   })
 }
 
+export const metadata = {
+  title: "Welcome!",
+  description: "Welcome to the Peoplez portal",
+}
+
 export default async function MembershipPortalHomePage() {
   const session = await getServerAuthSession()
   const membership = await getData(session?.user.id)
