@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Privacy Policy",
+  description: "Privacy Policy guidelines by Schrödinger Hat",
+}
+
 export default function PrivacyPolicyPage() {
   return (
     <>
