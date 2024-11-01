@@ -3,6 +3,11 @@ import Link from "next/link"
 
 import logo from "@/images/logo-white.svg"
 
+export const metadata = {
+  title: "Documents",
+  description: "Legal documents regarding Peoplez and Schrödinger Hat",
+}
+
 export default function LegalLayout({
   children,
 }: {
