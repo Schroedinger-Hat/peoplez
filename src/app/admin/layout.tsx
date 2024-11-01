@@ -34,6 +34,11 @@ interface LayoutInterface {
   unauthenticated: React.ReactNode
 }
 
+export const metadata = {
+  title: "Admin",
+  description: "Admin portal",
+}
+
 export default async function Layout({
   authenticated,
   unauthenticated,
