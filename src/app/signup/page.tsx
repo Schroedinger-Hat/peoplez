@@ -1,6 +1,11 @@
 import SignupForm from "@/app/signup/form"
 import { db } from "@/services/db"
 
+export const metadata = {
+  title: "Sign Up",
+  description: "Sign up for a membership",
+}
+
 function getData() {
   return db.membershipTemplate.findMany({
     orderBy: [
