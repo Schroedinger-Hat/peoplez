@@ -156,6 +156,17 @@ Project Link: [https://github.com/schroedinger-Hat/peoplez](https://github.com/s
         <br />
         <span>💻 Maintainer</span>
       </td>
+      <td align="center">
+        <a href="https://github.com/LobeTia">
+          <img src="https://github.com/LobeTia.png" width="100px;" alt="Mattia Lobertini"/>
+          <br />
+          <sub>
+            <b>Mattia Lobertini</b>
+          </sub>
+        </a>
+        <br />
+        <span>💻 Maintainer</span>
+      </td>
     </tr>
   </table>
 </div>
