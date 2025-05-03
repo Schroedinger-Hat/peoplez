@@ -40,6 +40,7 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#maintainers">Maintainers</a></li>
   </ol>
 </details>
 
@@ -116,3 +117,56 @@ Project Link: [https://github.com/schroedinger-Hat/peoplez](https://github.com/s
 [stars-url]: https://github.com/schroedinger-Hat/peoplez/stargazers
 [issues-shield]: https://img.shields.io/github/issues/schroedinger-Hat/peoplez.svg?style=for-the-badge
 [issues-url]: https://github.com/schroedinger-Hat/peoplez/issues
+
+## Maintainers
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/404answernotfound">
+          <img src="https://github.com/404answernotfound.png" width="100px;" alt="Lorenzo Pieri"/>
+          <br />
+          <sub>
+            <b>Lorenzo Pieri</b>
+          </sub>
+        </a>
+        <br />
+        <span>💻 Maintainer</span>
+      </td>
+      <td align="center">
+        <a href="https://github.com/TheJoin95">
+          <img src="https://github.com/TheJoin95.png" width="100px;" alt="Miki Lombardi"/>
+          <br />
+          <sub>
+            <b>Miki Lombardi</b>
+          </sub>
+        </a>
+        <br />
+        <span>💻 Maintainer</span>
+      </td>
+      <td align="center">
+        <a href="https://github.com/Readpato">
+          <img src="https://github.com/Readpato.png" width="100px;" alt="Patrick Raedler"/>
+          <br />
+          <sub>
+            <b>Patrick Raedler</b>
+          </sub>
+        </a>
+        <br />
+        <span>💻 Maintainer</span>
+      </td>
+      <td align="center">
+        <a href="https://github.com/LobeTia">
+          <img src="https://github.com/LobeTia.png" width="100px;" alt="Mattia Lobertini"/>
+          <br />
+          <sub>
+            <b>Mattia Lobertini</b>
+          </sub>
+        </a>
+        <br />
+        <span>💻 Maintainer</span>
+      </td>
+    </tr>
+  </table>
+</div>
