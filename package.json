@@ -53,7 +53,7 @@
     "clsx": "^2.1.0",
     "lodash": "^4.17.21",
     "next": "^15.5.7",
-    "next-auth": "^5.0.0-beta.30",
+    "next-auth": "^4.24.13",
     "nodemailer": "^7.0.11",
     "react": "19.2.1",
     "react-dom": "19.2.1",
